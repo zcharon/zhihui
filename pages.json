@@ -1,0 +1,92 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/main/main",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/page1/page1",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/mainpage/mainpage",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/image-to-image/image-to-image",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/common/common",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/chat/chat",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
+		"path" : "pages/tabbar/tabbar",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#f9f4ef;",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	// "tabBar":{
+	// 	"color":"#007AFF",
+	// 	"selectedColor":"#007AFF",
+	// 	"borderStyle":"white",
+	// 	"backgroundColor":"white",
+	// 	"list":[
+	// 		{
+	// 			"pagePath":"pages/index/test",
+	// 			"text":"首页",
+	// 			"iconPath":"static/icons/home_black.png",
+	// 			"selectedIconPath":"static/icons/home_black.png"
+	// 		},
+	// 		{
+	// 			"pagePath":"pages/index/main",
+	// 			"text":"主页",
+	// 			"iconPath":"static/icons/home_black.png",
+	// 			"selectedIconPath":"static/icons/home_black.png"
+	// 		},
+	// 		{
+	// 			"pagePath":"pages/index/test",
+	// 			"text":"首页",
+	// 			"iconPath":"static/icons/home_black.png",
+	// 			"selectedIconPath":"static/icons/home_black.png"
+	// 		}
+	// 	]
+	// }
+}
