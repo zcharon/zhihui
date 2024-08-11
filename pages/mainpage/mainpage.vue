@@ -1,0 +1,591 @@
+<template>
+  <div class="container">
+    <div class="content">
+		  <view class="left-panel">
+				<cd-tabbar></cd-tabbar>
+		  </view>
+		  <view class="main-panel">
+				<view style="display: flex;">
+				  <!-- <input type="text" placeholder="Search" /> -->
+					<uni-search-bar class="search-bar" bgColor="#fef6e2" placeholder="请输入搜索内容">
+						<template v-slot:searchIcon>
+								<uni-icons  color="#999999" size="30" type="search" />
+						</template>
+					</uni-search-bar>
+					<image src="../../static/mianpage/u100.png" style="height: 40px;width: 40px;top: 10px;"></image>
+				</view>
+				<view class="container">
+					<view class="content">
+						<view style="width: 70%">
+							<view style="display: flex;">
+								<image src="../../static/mianpage/normal_u40.png" style="height: 40px;width: 40px;top: 10px;"></image>
+								<text style="width: 92px;height: 40px; font-weight: 700;color: #764711;font-size: 22px;margin-top: 20px;margin-left: 10px;">热门推荐</text>
+							</view>
+							<view style="display: flex;">
+								<view class="card">
+									  <view class="img-container">
+										<image src="../../static/mianpage/u435.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="author">哗啦啦（6岁）</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
+										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
+									  </view>
+								</view>
+								<view class="card">
+									  <view class="img-container">
+										<image src="../../static/mianpage/u435.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="author">哗啦啦（6岁）</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
+										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
+									  </view>
+								</view>
+							</view>
+							<view style="display: flex;">
+								<view class="card">
+									  <view class="img-container">
+										<image src="../../static/mianpage/u435.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="author">哗啦啦（6岁）</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
+										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
+									  </view>
+								</view>
+								<view class="card">
+									  <view class="img-container">
+										<image src="../../static/mianpage/u435.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="author">哗啦啦（6岁）</text>
+									  </view>
+									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
+										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
+									  </view>
+								</view>
+							</view>
+						</view>
+						<view style="width: 30%;">
+							<view style="margin-left: 25%;margin-right: 25%;margin-top: 20px">
+								<image src="../../static/mianpage/touxiang.png" class="tx"></image>
+							</view>
+							<view style="display: flex;justify-content: center;margin-top: 25px;">
+								<view>
+									<text class="hy">欢迎你，</text>
+									<text class="hy" style="color: #a92d24;">刘小年</text>
+									<text class="hy">小朋友</text>
+								</view>
+							</view>
+							<view class="intro">
+								<view style="margin-top: 15px;margin-left: 15px;text-align: center;">
+									<text class="cardcontent" style="color: #a96618;">年龄：4岁</text>
+								</view>
+								<view style="margin-top: 10px;margin-left: 15px;text-align: center;">
+									<text class="cardcontent" style="color: #a96618;">已创作：5   本绘本</text>
+								</view>
+								<view style="margin-top: 10px;margin-left: 15px;margin-bottom: 25px;text-align: center;">
+									<text class="cardcontent" style="color: #a96618;">已看过：68 本绘本</text>
+								</view>
+							</view>
+							<view style="margin-top: 25px;margin-left: 15px;text-align: center;">
+								<text class="hy" style="color: #d07d1d;">你的作品</text>
+							</view>
+							<view class="intro">
+								<view class="minicard">
+									  <view class="img-container">
+										<image src="../../static/u446.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 5px;margin-left: 5px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 5px;margin-left: 5px;margin-right: 15px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+								</view>
+								<view class="minicard">
+									  <view class="img-container">
+										<image src="../../static/u449.png" class="img"></image>
+									  </view>
+									  <view style="margin-top: 5px;margin-left: 5px;">
+										<text class="cardtext">白雪公主冒险记</text>
+									  </view>
+									  <view style="margin-top: 5px;margin-left: 5px;margin-right: 5px;">
+										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
+									  </view>
+								</view>
+							</view>
+						</view>
+		
+					</view>
+				</view>
+		  </view>
+		  
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'DrawingPlatform',
+  data() {
+    return {
+      recommendations: [],
+      viewedBooksCount: 0
+    };
+  },
+  methods: {
+    goToHome() {
+      uni.navigateTo({
+        url: '/pages/mainpage/mainpage'
+      });
+    },
+    goToRegions() {
+      this.$router.push({ name: 'Regions' });
+    },
+    goToLibrary() {
+      this.$router.push({ name: 'Library' });
+    },
+    goToFriends() {
+      this.$router.push({ name: 'Friends' });
+    },
+    async fetchBookData() {
+      try {
+        const response = await fetch('https://your-backend-api.com/fetchBookData', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch book data');
+        }
+
+        const data = await response.json();
+        this.recommendations = data.recommendations;
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching book data');
+      }
+    },
+    async fetchViewedBooksCount() {
+      try {
+        const response = await fetch('https://your-backend-api.com/fetchViewedBooksCount', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch viewed books count');
+        }
+
+        const data = await response.json();
+        this.viewedBooksCount = data.viewedBooksCount;
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching viewed books count');
+      }
+    },
+    async fetchRecommendedBooks() {
+      try {
+        const response = await fetch('https://your-backend-api.com/fetchRecommendedBooks', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch recommended books');
+        }
+
+        const data = await response.json();
+        this.recommendations = data.recommendations;
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching recommended books');
+      }
+    }
+  },
+  async mounted() {
+    await this.fetchBookData();
+    await this.fetchViewedBooksCount();
+    await this.fetchRecommendedBooks();
+  }
+};
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  /* height: 100vh; */
+  /* background-color: #f8f2eb; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.time {
+  font-size: 18px;
+  color: #333;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+}
+
+.left-panel {
+		width: 10%;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  position: fixed; /* 使元素固定在屏幕上 */
+}
+
+
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-item {
+  padding: 10px;
+  margin: 5px 0;
+  text-align: center;
+  border: none;
+  background: none;
+  font-size: 16px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.username {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.main-panel {
+  width: 90%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* .search-bar {
+  margin-bottom: 20px;
+} */
+
+.search-bar{
+  width: 100%;
+  /* padding: 10px; */
+  font-size: 40px;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 5px; */
+}
+
+.recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recommendation-card {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.recommendation-image {
+  width: 100%;
+  height: auto;
+}
+
+.recommendation-info {
+  padding: 10px;
+}
+
+.recommendation-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.recommendation-info p {
+  font-size: 14px;
+  color: #666;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* .right-panel {
+  width: 30%;
+  background-color: #fff9f4;
+  padding: 10px;
+} */
+
+.user-info {
+  margin-bottom: 20px;
+}
+
+.user-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.user-works img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 49%;  
+  height: auto; 
+  background-color: #f6f1ed;
+  margin-right: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.img-container {
+  flex: 1; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 8; 
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.cardtext, .cardcontent, .author, .tag {
+  margin-top: 0.5em;
+  font-size: 1rem;
+  text-align: left;
+}
+/* .card {
+  width: 100%;
+  height: auto;
+  background-color: #f6f1ed;
+  margin-right: 20px;
+}
+.img {
+  width: 100%;
+  height: auto;  
+  object-fit: cover; 
+  box-sizing: border-box;
+}
+*/
+.cardtext {
+  margin-top: 0.5em;
+  font-size: 1.2rem;
+  text-align: left;
+/*  width: 373px;
+  height: 25px;
+  background-color: rgba(220, 133, 31, 0); */
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: #a96618;
+  line-height: normal;
+}
+.cardcontent {
+	margin-top: 0.5em;
+	font-size: 1rem;
+	text-align: left;
+  /* width: 388px;
+  height: 50px; */
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+  color: #333333;
+}
+.author{
+	margin-top: 0.5em;
+	font-size: 1rem;
+	text-align: left;
+  background-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+  color: rgba(169, 102, 24, 0.76);
+  line-height: normal;
+}
+.tag {
+	display: inline-block;
+	margin-top: 0.5em;
+	font-size: 1rem;
+	text-align: left;
+  width: 5em;
+
+  margin-right: 10px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: normal;
+} 
+
+.tx {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1.2; 
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.hy {
+  height: 28px;
+  font-size: 2rem;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: #a96618;
+  text-align: center;
+  /* line-height: normal; */
+}
+.intro {
+  width: 100%;
+  margin-top: 30px;
+  height: auto;
+  padding: 2px 2px 2px 2px;
+  border-radius: 11px;
+  background-color: rgba(204, 62, 31, 0.09);
+  box-sizing: border-box;
+}
+.minicard {
+  display: flex;
+  flex-direction: column;
+  width: 96%;  
+  height: auto; 
+  /* background-color: #f6f1ed; */
+  /* margin-top: 10px; */
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 1em;
+  box-sizing: border-box;
+}
+</style>
+
+
+<!-- .recommendation-info {
+  padding: 10px;
+}
+
+.recommendation-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.recommendation-info p {
+  font-size: 14px;
+  color: #666;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.right-panel {
+  width: 20%;
+  background-color: #fff9f4;
+  padding: 10px;
+}
+
+.user-info {
+  margin-bottom: 20px;
+}
+
+.user-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.user-works img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+} -->
+<!-- </style> -->
