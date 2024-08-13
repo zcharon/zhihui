@@ -1,135 +1,60 @@
 <template>
-  <div class="app">
-    <header class="header">
-      <img src="/static/u1.png" alt="Logo" class="logo"/>
-      <input type="search" placeholder="Search" class="search-bar"/>
-    </header>
-    <div class="navigation">
-      <button class="nav-button">主页</button>
-      <button class="nav-button">分区</button>
-      <button class="nav-button">卡片库</button>
-      <button class="nav-button">好友</button>
-    </div>
-    <div class="content">
-      <img src="/static/u449.png" alt="Beautiful Tree" class="main-image"/>
-      <input type="file" @change="onFileChange" />
-      <button @click="recognizeObject">识别图中的物体</button>
-      <div v-if="knowledgeCard">
-        <h3>{{ knowledgeCard.title }}</h3>
-        <p>{{ knowledgeCard.description }}</p>
-        <!-- Display additional fields as needed -->
-      </div>
-      <button @click="checkChatInvitation">检查聊天室邀请</button>
-      <div class="media-controls">
-        <button>⏮</button>
-        <button>⏯</button>
-        <button>⏭</button>
-        <button>🔁</button>
-      </div>
-      <div class="volume-slider">
-        <input type="range" min="0" max="100" value="50">
-      </div>
-    </div>
+  <div class="container">
+	<view class="left-panel">
+		<cd-tabbar></cd-tabbar>
+	</view>
+	<view class="content">
+		  <view style="margin-bottom:20px;margin-left:30px;display: flex;">
+				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 22px;">奉献的草</text>
+				<text style="color:rgba(169, 102, 24, 0.75);font-size: 24px;margin-left: 18px;">刘小年（4岁）</text>
+				<view style="margin-left: 450px;display: flex;">
+					<text class="tag" style="background-color: rgba(242, 176, 176, 1);font-size: 16px;">女生</text>
+					<text class="tag" style="background-color: rgba(252, 198, 159, 1);font-size: 16px;">3-6岁</text>
+				</view>
+				<img src="/static/common/normal_u30.svg" class="shape" style="margin-left: 10px;">
+				<img src="/static/common/normal_thumb_icon_u27.svg" class="thumb-icon" style="margin-left: 10px;">
+		  </view>
+		  <img src="/static/u449.png" alt="Beautiful Tree" style="width: 1102px;height: 551px;box-sizing: border-box;"/>
+		  <text style="margin-top:20px; text-align: center;line-height: center;">草在春天的阳光和雨露中快乐地成长。它沐浴在温暖的阳光下，吸收着土壤中的养分，努力向着天空伸展。</text>
+		  <view style="margin-top:30px;display: flex;">
+			<view style="margin-left:380px;display: flex;">
+				<img src="/static/common/normal_u41.png" style="width: 35px;height: 35px;box-sizing: border-box;">
+				<img src="/static/common/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(270deg);margin-left:5px;">
+				<view style="display: flex;">
+					<text style="font-weight:bold;font-size: 20px;margin-left:25px">第</text>
+					<text style="color:#dc851f;font-weight:bold;font-size: 20px;margin-left:5px">1</text>
+					<text style="font-weight:bold;font-size: 20px;margin-left:5px">页</text>
+				</view>
+				<img src="/static/common/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
+				<img src="/static/common/normal_u40.png" style="width: 35px;height: 35px;box-sizing: border-box;margin-left:5px;">
+				<img src="/static/common/normal_u42.png" style="width: 31px;height: 31px;box-sizing: border-box;margin-left:5px;">
+			</view>
+			<view style="display: flex;margin-left:200px;">
+				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 20px;margin-right: 8px;">知识卡片</text>
+			  	<switch color="#FFCC33" />
+			</view>
+		  </view>
+	</view>
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  data() {
-    return {
-      selectedFile: null,
-      knowledgeCard: null,
-    };
-  },
-  methods: {
-    async checkChatInvitation() {
-      try {
-        const response = await fetch('https://your-backend-api.com/checkChatInvitation', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to check chat invitations');
-        }
-
-        const data = await response.json();
-        if (data.invitation) {
-          alert(`You have been invited to join the chat room: ${data.chatRoomName}`);
-          // Additional logic for handling the chat invitation can be added here
-        } else {
-          alert('No chat invitations at the moment');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while checking chat invitations');
-      }
-    },
-    onFileChange(event) {
-      this.selectedFile = event.target.files[0];
-    },
-    async recognizeObject() {
-      if (!this.selectedFile) {
-        alert('Please select an image file first.');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('image', this.selectedFile);
-
-      try {
-        const response = await fetch('https://your-backend-api.com/recognizeObject', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (!response.ok) {
-          throw new Error('Object recognition failed');
-        }
-
-        const data = await response.json();
-        if (data.objectRecognized) {
-          this.fetchKnowledgeCard(data.objectId);
-        } else {
-          alert('No objects recognized in the image');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while recognizing the object');
-      }
-    },
-    async fetchKnowledgeCard(objectId) {
-      try {
-        const response = await fetch(`https://your-backend-api.com/fetchKnowledgeCard?objectId=${objectId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch knowledge card');
-        }
-
-        const data = await response.json();
-        this.knowledgeCard = data.knowledgeCard;
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while fetching the knowledge card');
-      }
-    }
-  }
+  name: 'App'
 }
 </script>
 
 <style scoped>
+	
+.container {
+	  font-family: Arial, sans-serif;
+	  padding: 20px;
+}
 .app {
   font-family: 'Arial', sans-serif;
   color: #333;
-  max-width: 1000px;
+/*  max-width: 1000px; */
   margin: auto;
 }
 
@@ -169,9 +94,19 @@ export default {
 
 .content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+ flex-direction: column;
+/*  align-items: center; */
+ padding: 80px;
+ width: 1172px;
+ height: 813px;
+ padding: 2px 2px 2px 2px;
+ border-radius: 5px;
+ border: 1px solid #fef6e2;
+ background-color: #f6f1ed;
+ box-sizing: border-box;
+ position: absolute; 
+ top: 155px; 
+ left: 174px;
 }
 
 .main-image {
@@ -190,5 +125,76 @@ export default {
 
 .volume-slider input {
   width: 100%;
+}
+
+.card-background {
+  width: 1172px;
+  height: 813px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 5px;
+  border: 1px solid #fef6e2;
+  background-color: #f6f1ed;
+  box-sizing: border-box;
+  position: absolute; 
+  top: 155px; 
+  left: 174px;
+}
+
+.left-panel {
+		width: 10%;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  position: fixed; 
+}
+
+.tag {
+	display: inline-block;
+	margin-top: 0.5em;
+	font-size: 1rem;
+	text-align: left;
+  width: 5em;
+
+  margin-right: 10px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: normal;
+} 
+
+.shape {
+  width: 33px;
+  height: 31px;
+  padding: 2px 2px 2px 2px;
+  border: 1px solid rgba(194, 194, 194, 0);
+  background-color: #909090;
+  box-sizing: border-box;
+}
+.shape:hover {
+  box-sizing: border-box;
+}
+.shape:active {
+  background-color: #d15353;
+  box-sizing: border-box;
+}
+.shape:checked {
+  background-color: #ff2f2f;
+  box-sizing: border-box;
+}
+
+.thumb-icon {
+  width: 32px;
+  height: 31px;
+  padding: 2px 2px 2px 2px;
+  background-color: #909090;
+  box-sizing: border-box;
+}
+.thumb-icon:checked {
+  background-color: #1e98d7;
+  box-sizing: border-box;
 }
 </style>

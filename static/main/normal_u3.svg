@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="548px" height="56px" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1 0 0 1 -721 -97 )">
+    <path d="M 1246.6 97  C 1246.6 97  1250.6 97.2043795620438  1250.6 97.2043795620438  C 1250.6 97.2043795620438  1269 125  1269 125  C 1269 125  1250.6 152.7956204379562  1250.6 152.7956204379562  C 1250.6 152.7956204379562  1246.6 153  1246.6 153  C 1246.6 153  733 153  733 153  C 726.28 153  721 147.72  721 141  C 721 141  721 109  721 109  C 721 102.28  726.28 97  733 97  C 733 97  1246.6 97  1246.6 97  Z " fill-rule="nonzero" fill="#ffb74d" stroke="none" />
+  </g>
+  
+  <text x="100" y="30" font-family="Arial" font-size="20" fill="rgba(255, 255, 255, 1)" text-anchor="middle" alignment-baseline="middle" font-weight="bold">
+      制作绘本
+  </text>
+</svg>
