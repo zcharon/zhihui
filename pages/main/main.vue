@@ -19,13 +19,13 @@
 
       <div class="style-selection">	  
         <div class="styles">
-			<radio-group name="radio">
+			<radio-group v-model="selectedStyle" name="radio" @change="handleStyleChange">
 				<label style="height: 195px;width: 136px;position: absolute; bottom: 324px;left: 116px;" >
 					<view>
 						<img src="/static/main/normal_u28.png" style= "width: 136px;height: 136px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio1" class="text" color="#dc851f"/>
+						<radio value="0" class="text" color="#dc851f"/>
 						<text >不指定</text>
 					</view>
 				</label>
@@ -34,7 +34,7 @@
 						<img src="/static/movie-style-image.png" alt="Movie Style" style= "width: 335px;height: 167px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio2" class="text" color="#dc851f"/><text>电影风格</text>
+						<radio value="1" class="text" color="#dc851f"/><text>电影风格</text>
 					</view>					
 				</label>
 				<label style="height: 217px;width: 317px;position: absolute;bottom: 324px;left: 519px;">
@@ -42,7 +42,7 @@
 						<img src="/static/anime-style-image.png" alt="Anime Style" style="height: 158px;width: 317px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio3" class="text" color="#dc851f" /><text >日本动漫风格</text>
+						<radio value="2" class="text" color="#dc851f" /><text >日本动漫风格</text>
 					</view>
 				</label>
 				<label style="height: 207px;width: 328px;position: absolute;bottom: 324px;left: 768px;">
@@ -50,7 +50,7 @@
 						<img src="/static/photo-style-image.png" alt="Photo Style" style="height: 147px;width: 348px;box-sizing: border-box;transform: scale(1.1)"/>
 					</view>
 					<view style="display: flex; margin-top: 15px;">
-						<radio value="radio4" class="text" color="#dc851f"/><text>摄影风格</text>
+						<radio value="3" class="text" color="#dc851f"/><text>摄影风格</text>
 					</view>
 				</label>
 				<label style="height: 278px;width: 312px;position: absolute;bottom: 43px;left: 116px;">
@@ -58,7 +58,7 @@
 						<img src="/static/disney-style-image.png" alt="Disney Style" style="height: 234px;width: 312px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio5" class="text" color="#dc851f"/><text>迪士尼风格</text>
+						<radio value="4" class="text" color="#dc851f"/><text>迪士尼风格</text>
 					</view>
 				</label>
 				<label style="height: 255px;width: 277px;position: absolute;bottom: 43px;left: 420px;">
@@ -66,7 +66,7 @@
 						<img src="/static/comic-style-image.png" alt="Comic Style" style="height: 208px;width: 277px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio6" class="text" color="#dc851f"/><text>漫画风格</text>
+						<radio value="5" class="text" color="#dc851f"/><text>漫画风格</text>
 					</view>
 				</label>
 				<label style="height: 258px;width: 248px;position: absolute;bottom: 43px;left: 750px;">
@@ -74,7 +74,7 @@
 						<img src="/static/sketch-style-image.png" alt="Sketch Style" style="height: 207px;width: 155px;box-sizing: border-box;"/>
 					</view>
 					<view style="display: flex; margin-top: 10px;">
-						<radio value="radio7" class="text" color="#dc851f"/><text>线描风格</text>
+						<radio value="6" class="text" color="#dc851f"/><text>线描风格</text>
 					</view>
 				</label>
 			</radio-group>         
@@ -82,15 +82,15 @@
       </div>
       <div class="age-selection" style="display: flex;">
 		<text class="nianlingduan">年龄段</text>
-		<radio-group name="radio">
+		<radio-group  v-model="selectedAge" name="radio" @change="handleAgeChange">
 		  	<label>
-		  		<radio value="radio1" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">3岁以下</text>
+		  		<radio value="0" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">3岁以下</text>
 		  	</label>
 		  	<label style="margin-left: 5px;">
-				<radio value="radio2" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">3-6岁</text>
+				<radio value="1" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">3-6岁</text>
 		  	</label>
 			<label style="margin-left: 5px;">
-				<radio value="radio3" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">6岁以上</text>
+				<radio value="2" color="#dc851f" /><text style="margin-left: 5px; font-weight:bold">6岁以上</text>
 			</label>
 		</radio-group>
       </div>
@@ -102,33 +102,30 @@
 </template>
 
 <script>
+import CdTabbar from '@/pages/tabbar/tabbar.vue';
+
 export default {
+   components: {
+      CdTabbar
+  },
   data() {
     return {
-      selectedStyle: '',
-      selectedAge: '',
+      selectedStyle: "",
+      selectedAge: "",
     };
   },
   methods: {
+	handleStyleChange(event) {
+	  this.selectedStyle = event.detail.value;
+	},
+	handleAgeChange(event) {
+	  this.selectedAge = event.detail.value;
+	},
     async confirmSelection() {
       try {
-        const response = await fetch('https://your-backend-api.com/selection', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            style: this.selectedStyle,
-            age: this.selectedAge
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Selection submission failed');
-        }
-
-        const data = await response.json();
-        if (data.success) {
+		localStorage.setItem("selectedStyle", JSON.stringify(this.selectedStyle));
+		localStorage.setItem("selectedAge", JSON.stringify(this.selectedAge));
+		if(true){
           // Handle successful submission
           uni.navigateTo({
             url: '/pages/page1/page1'

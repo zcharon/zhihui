@@ -27,6 +27,13 @@
 		}
 	},
 	{
+		"path" : "pages/mainpage/mainpage1",
+		"style" : 
+		{
+			"navigationBarTitleText" : "智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台"
+		}
+	},
+	{
 		"path" : "pages/image-to-image/image-to-image",
 		"style" : 
 		{

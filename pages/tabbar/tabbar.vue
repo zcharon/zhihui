@@ -1,41 +1,42 @@
 <template>
     <view class="tabbar">
-		<view class="vertical-box">
-			  <view class="element-container" id="first-element">
-				<image src="/static/u1.png" class="logo"></image>
-				<image src="../../static/login/normal_u1.svg" class="ellipse"></image>
-			  </view>
-			<view class="rectangle">
-				<view class="vertical-group">
-					<view class="vertical-one">
-						<image src="/static/mianpage/normal_u3.png" class="img"></image>
-						<text class="text">主页</text>
-					</view>
-					<view class="vertical-one">
-						<image src="/static/mianpage/normal_u4.png" class="img"></image>
-						<text class="text">分区</text>
-					</view>
-					<view class="vertical-one">
-						<image src="/static/mianpage/normal_u7.png" class="img"></image>
-						<text class="text">卡片库</text>
-					</view>
-					<view class="vertical-one">
-						<image src="/static/mianpage/normal_u5.png" class="img"></image>
-						<text class="text">好友</text>
-					</view>
-				</view>
-			</view>
-			<image src="../../static/mianpage/touxiang.png" class="touxiang" id="last-element"></image>
-		</view>
+        <view class="vertical-box">
+            <view class="element-container" id="first-element" @click="navigateTo('/pages/main/main')">
+                <image src="/static/u1.png" class="logo"></image>
+                <image src="../../static/login/normal_u1.svg" class="ellipse"></image>
+            </view>
+            <view class="rectangle">
+                <view class="vertical-group">
+                    <view class="vertical-one" @click="navigateTo('/pages/mainpage/mainpage')">
+                        <image src="/static/mianpage/normal_u3.png" class="img"></image>
+                        <text class="text">主页</text>
+                    </view>
+                    <view class="vertical-one" @click="navigateTo('/pages/mainpage/mainpage')">
+                        <image src="/static/mianpage/normal_u4.png" class="img"></image>
+                        <text class="text">分区</text>
+                    </view>
+                    <view class="vertical-one" @click="navigateTo('/pages/mainpage/mainpage')">
+                        <image src="/static/mianpage/normal_u7.png" class="img"></image>
+                        <text class="text">卡片库</text>
+                    </view>
+                    <view class="vertical-one" @click="navigateTo('/pages/mainpage/mainpage')">
+                        <image src="/static/mianpage/normal_u5.png" class="img"></image>
+                        <text class="text">好友</text>
+                    </view>
+                </view>
+            </view>
+            <image src="../../static/mianpage/touxiang.png" class="touxiang" id="last-element" @click="navigateTo('/pages/image-to-image/image-to-image')"></image>
+        </view>
     </view>
 </template>
 
 <script>
 export default {
-  data() {
-    return {};
-  },
-  methods: {}
+  methods: {
+    navigateTo(path) {
+      this.$router.push(path);
+    }
+  }
 };
 </script>
 

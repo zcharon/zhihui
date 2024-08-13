@@ -7,7 +7,7 @@
 				<text class="title">智 绘 ：定 制 化 儿 童 绘 本 创 作 平 台</text>
 			</view>
 			<view class="form">
-				<form @click="login">
+				<form @submit.prevent="login">
 					<view style="display: flex">
 						<text class="zhmm">账号：</text>
 						<input v-model="account" class="input-field-account" placeholder="  请输入账号" />
@@ -18,8 +18,8 @@
 						<text style="width: 90px;height: 15px;color: #7f7f7f;margin-top: 25px;margin-left: 5px;">忘记密码?</text>
 					</view>
 					<view style="display: flex;justify-content: center;">
-						<button formType="click" class="zhuce">注册</button>
-						<button formType="click" class="denglu">登录</button>
+						<button @click="register" class="zhuce">注册</button>
+						<button @click="login" class="denglu">登录</button>
 					</view>
 				</form>
 			</view>
@@ -40,23 +40,24 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await fetch('https://your-backend-api.com/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            account: this.account,
-            password: this.password
-          })
-        });
+        // const response = await fetch('https://your-backend-api.com/login', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   body: JSON.stringify({
+        //     account: this.account,
+        //     password: this.password
+        //   })
+        // });
 
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
+        // if (!response.ok) {
+        //   throw new Error('Login failed');
+        // }
 
-        const data = await response.json();
-        if (data.success) {
+        // const data = await response.json();
+		// if (data.success) {
+        if (true) {
           // Handle successful login (e.g., store token, redirect)
           uni.navigateTo({
             url: '/pages/main/main'

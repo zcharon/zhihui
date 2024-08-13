@@ -48,7 +48,11 @@
 </template>
 
 <script>
+import CdTabbar from '@/pages/tabbar/tabbar.vue';
 export default {
+  components: {
+      CdTabbar
+  },
   name: 'App',
   data() {
     return {

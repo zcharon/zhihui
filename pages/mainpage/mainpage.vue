@@ -1,251 +1,207 @@
 <template>
   <div class="container">
     <div class="content">
-		  <view class="left-panel">
-				<cd-tabbar></cd-tabbar>
-		  </view>
-		  <view class="main-panel">
-				<view style="display: flex;">
-				  <!-- <input type="text" placeholder="Search" /> -->
-					<uni-search-bar class="search-bar" bgColor="#fef6e2" placeholder="请输入搜索内容">
-						<template v-slot:searchIcon>
-								<uni-icons  color="#999999" size="30" type="search" />
-						</template>
-					</uni-search-bar>
-					<image src="../../static/mianpage/u100.png" style="height: 40px;width: 40px;top: 10px;"></image>
-				</view>
-				<view class="container">
-					<view class="content">
-						<view style="width: 70%">
-							<view style="display: flex;">
-								<image src="../../static/mianpage/normal_u40.png" style="height: 40px;width: 40px;top: 10px;"></image>
-								<text style="width: 92px;height: 40px; font-weight: 700;color: #764711;font-size: 22px;margin-top: 20px;margin-left: 10px;">热门推荐</text>
-							</view>
-							<view style="display: flex;">
-								<view class="card">
-									  <view class="img-container">
-										<image src="../../static/mianpage/u435.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="author">哗啦啦（6岁）</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
-										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
-									  </view>
+		<view class="left-panel">
+			<cd-tabbar></cd-tabbar>
+		</view>
+		<view class="main-panel">
+			<view style="display: flex;">
+			  <!-- <input type="text" placeholder="Search" /> -->
+				<uni-search-bar class="search-bar" bgColor="#fef6e2" placeholder="请输入搜索内容">
+					<template v-slot:searchIcon>
+						<uni-icons  color="#999999" size="30" type="search" />
+					</template>
+				</uni-search-bar>
+				<image src="../../static/mianpage/u100.png" style="height: 40px;width: 40px;top: 10px;"></image>
+			</view>
+			<view class="container">
+				<view class="content">
+					<view style="width: 70%">
+						<view style="display: flex;">
+							<image src="../../static/mianpage/normal_u40.png" style="height: 40px;width: 40px;top: 10px;"></image>
+							<text style="width: 92px;height: 40px; font-weight: 700;color: #764711;font-size: 22px;margin-top: 20px;margin-left: 10px;">热门推荐</text>
+						</view>
+						<view style="display: flex;">
+							<view class="card" v-for="(book, index) in recommendations" :key="index">
+								<view class="img-container">
+									<image :src="book.image_path || '../../static/mianpage/u435.png'" class="img"></image>
 								</view>
-								<view class="card">
-									  <view class="img-container">
-										<image src="../../static/mianpage/u435.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="author">哗啦啦（6岁）</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
-										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
-									  </view>
+								<view style="margin-top: 15px;margin-left: 15px;">
+									<text class="cardtext">{{ book.book_title }}</text>
 								</view>
-							</view>
-							<view style="display: flex;">
-								<view class="card">
-									  <view class="img-container">
-										<image src="../../static/mianpage/u435.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="author">哗啦啦（6岁）</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
-										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
-									  </view>
+								<view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+									<text class="cardcontent">{{ book.book_abstract }}</text>
 								</view>
-								<view class="card">
-									  <view class="img-container">
-										<image src="../../static/mianpage/u435.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="author">哗啦啦（6岁）</text>
-									  </view>
-									  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-										<text class="tag" style="background-color: rgba(252, 198, 159, 1);">3-6岁</text>
-										<text class="tag" style="background-color: rgba(176, 215, 242, 1);">冒险</text>
-									  </view>
+								<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+									<text class="author">{{ book.author }}</text>
+								</view>
+								<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+									<text class="tag" :style="{ backgroundColor: 'rgba(252, 198, 159, 1)' }">{{ book.recom_age }}</text>
+									<text class="tag" :style="{ backgroundColor: 'rgba(176, 215, 242, 1)' }">{{ book.style }}</text>
 								</view>
 							</view>
 						</view>
-						<view style="width: 30%;">
-							<view style="margin-left: 25%;margin-right: 25%;margin-top: 20px">
-								<image src="../../static/mianpage/touxiang.png" class="tx"></image>
+					</view>
+					<view style="width: 30%;">
+						<view style="margin-left: 25%;margin-right: 25%;margin-top: 20px">
+							<image src="../../static/mianpage/touxiang.png" class="tx" @click="navigateTo('/pages/image-to-image/image-to-image')"></image>
+						</view>
+						<view style="display: flex;justify-content: center;margin-top: 25px;">
+							<view>
+								<text class="hy">欢迎你，</text>
+								<text class="hy" style="color: #a92d24;">{{user_name}}</text>
+								<text class="hy">小朋友</text>
 							</view>
-							<view style="display: flex;justify-content: center;margin-top: 25px;">
-								<view>
-									<text class="hy">欢迎你，</text>
-									<text class="hy" style="color: #a92d24;">刘小年</text>
-									<text class="hy">小朋友</text>
-								</view>
+						</view>
+						<view class="intro">
+							<view style="margin-top: 15px;margin-left: 15px;text-align: center;">
+								<text class="cardcontent" style="color: #a96618;">年龄：{{user_age}}岁</text>
 							</view>
-							<view class="intro">
-								<view style="margin-top: 15px;margin-left: 15px;text-align: center;">
-									<text class="cardcontent" style="color: #a96618;">年龄：4岁</text>
-								</view>
-								<view style="margin-top: 10px;margin-left: 15px;text-align: center;">
-									<text class="cardcontent" style="color: #a96618;">已创作：5   本绘本</text>
-								</view>
-								<view style="margin-top: 10px;margin-left: 15px;margin-bottom: 25px;text-align: center;">
-									<text class="cardcontent" style="color: #a96618;">已看过：68 本绘本</text>
-								</view>
+							<view style="margin-top: 10px;margin-left: 15px;text-align: center;">
+								<text class="cardcontent" style="color: #a96618;">已创作：{{create_books_num}}   本绘本</text>
 							</view>
-							<view style="margin-top: 25px;margin-left: 15px;text-align: center;">
-								<text class="hy" style="color: #d07d1d;">你的作品</text>
+							<view style="margin-top: 10px;margin-left: 15px;margin-bottom: 25px;text-align: center;">
+								<text class="cardcontent" style="color: #a96618;">已看过：{{viewed_books_num}} 本绘本</text>
 							</view>
-							<view class="intro">
-								<view class="minicard">
-									  <view class="img-container">
-										<image src="../../static/u446.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 5px;margin-left: 5px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 5px;margin-left: 5px;margin-right: 15px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
+						</view>
+						<view style="margin-top: 25px;margin-left: 15px;text-align: center;">
+							<text class="hy" style="color: #d07d1d;">你的作品</text>
+						</view>
+						<view class="intro" v-for="(book, index) in my_book_data" :key="index">
+							<view class="minicard">
+								<view class="img-container">
+									<image :src="book.image_path || '../../static/u446.png'" class="img" @click="navigateTo('/pages/common/common')"></image>
 								</view>
-								<view class="minicard">
-									  <view class="img-container">
-										<image src="../../static/u449.png" class="img"></image>
-									  </view>
-									  <view style="margin-top: 5px;margin-left: 5px;">
-										<text class="cardtext">白雪公主冒险记</text>
-									  </view>
-									  <view style="margin-top: 5px;margin-left: 5px;margin-right: 5px;">
-										<text class="cardcontent">在一个遥远的王国里，住着一位美丽的公主，名叫白雪。白雪公主有着如雪般白皙的皮肤……</text>
-									  </view>
+								<view style="margin-top: 5px;margin-left: 5px;">
+									<text class="cardtext">{{book.book_title}}</text>
+								</view>
+								<view style="margin-top: 5px;margin-left: 5px;margin-right: 15px;">
+									<text class="cardcontent">{{book.book_abstract}}</text>
 								</view>
 							</view>
 						</view>
-		
 					</view>
 				</view>
-		  </view>
-		  
+			</view>
+		</view>
     </div>
   </div>
 </template>
 
 <script>
+import CdTabbar from '@/pages/tabbar/tabbar.vue';
+
 export default {
   name: 'DrawingPlatform',
+  components: {
+      CdTabbar
+  },
   data() {
     return {
+	  user_name: "",
+	  user_age: "",
+	  create_books_num: 0,
+	  viewed_books_num: 0,
       recommendations: [],
-      viewedBooksCount: 0
+	  my_book_data: [],
     };
   },
   methods: {
-    goToHome() {
-      uni.navigateTo({
-        url: '/pages/mainpage/mainpage'
-      });
-    },
-    goToRegions() {
-      this.$router.push({ name: 'Regions' });
-    },
-    goToLibrary() {
-      this.$router.push({ name: 'Library' });
-    },
-    goToFriends() {
-      this.$router.push({ name: 'Friends' });
-    },
-    async fetchBookData() {
+    async fetchUserData() {
       try {
-        const response = await fetch('https://your-backend-api.com/fetchBookData', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch book data');
-        }
-
-        const data = await response.json();
-        this.recommendations = data.recommendations;
+  //       const response = await fetch('https://your-backend-api.com/fetchUserData', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         }
+  //       });
+    
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch book data');
+  //       }
+    
+  //       const data = await response.json();
+  //       this.user_name = data.user_name;
+		// this.user_age = data.user_age;
+		// this.create_books_num = data.create_books_num;
+		// this.viewed_books_num = data.viewed_books_num;
+		const response = await fetch('/pages/mainpage/userData.json');
+				  if (!response.ok) {
+					throw new Error('Failed to fetch mock data');
+				  }
+		const data = await response.json();
+		this.user_name = data.user_name;
+		this.user_age = data.user_age;
+		this.create_books_num = data.create_books_num;
+		this.viewed_books_num = data.viewed_books_num;
       } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching book data');
       }
     },
-    async fetchViewedBooksCount() {
+	async fetchMyBooksData() {
       try {
-        const response = await fetch('https://your-backend-api.com/fetchViewedBooksCount', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+  //       const response = await fetch('https://your-backend-api.com/fetchBookData', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         }
+  //       });
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch viewed books count');
-        }
-
-        const data = await response.json();
-        this.viewedBooksCount = data.viewedBooksCount;
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch book data');
+  //       }
+		
+  //       const data = await response.json();
+  //       this.my_book_data = data.data;
+	  const response = await fetch('/pages/mainpage/myBookData.json');
+		  if (!response.ok) {
+			throw new Error('Failed to fetch mock data');
+		  }
+	  
+	  const data = await response.json();
+	  this.my_book_data = data.data;
       } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while fetching viewed books count');
+        alert('An error occurred while fetching book data');
       }
     },
-    async fetchRecommendedBooks() {
+    async fetchRecommendedBooksData() {
       try {
-        const response = await fetch('https://your-backend-api.com/fetchRecommendedBooks', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+        // const response = await fetch('https://your-backend-api.com/fetchRecommendedBooksData', {
+        //   method: 'GET',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   }
+        // });
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch recommended books');
-        }
+        // if (!response.ok) {
+        //   throw new Error('Failed to fetch recommended books');
+        // }
 
-        const data = await response.json();
-        this.recommendations = data.recommendations;
+        // const data = await response.json();
+        // this.recommendations = data.data;
+		const response = await fetch('/pages/mainpage/recommodationBooksData.json');
+		    if (!response.ok) {
+		      throw new Error('Failed to fetch mock data');
+		    }
+		
+		const data = await response.json();
+		this.recommendations = data.data;
       } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching recommended books');
       }
-    }
+    },
+	navigateTo(path) {
+		// console.log(JSON.parse(localStorage.getItem("selectedStyle")));
+		this.$router.push(path);
+	}
   },
   async mounted() {
-    await this.fetchBookData();
-    await this.fetchViewedBooksCount();
-    await this.fetchRecommendedBooks();
+	await this.fetchUserData();
+    await this.fetchMyBooksData();
+    await this.fetchRecommendedBooksData();
   }
 };
 </script>
