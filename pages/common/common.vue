@@ -31,10 +31,10 @@
 			</view>
 			<view style="display: flex;margin-left:200px;">
 				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 20px;margin-right: 8px;">知识卡片</text>
-			  	<switch color="#FFCC33" />
+			  	<switch @change="handleSwitchChange" color="#FFCC33" />
 			</view>
 			<view>
-				<img src="/static/common/normal_u58.png" style="width: 34px;height: 34px;box-sizing: border-box;position:absolute; top: 500px;left: 200px;">
+				<img v-show="switch_flag" src="/static/common/normal_u58.png" style="width: 34px;height: 34px;box-sizing: border-box;position:absolute; top: 500px;left: 200px;">
 			</view>
 		  </view>
 	</view>
@@ -62,6 +62,7 @@ export default {
 			image: "",
 			if_like: false,
 			audio: null,
+			switch_flag : false,
 			sSicon: ["/static/common/normal_u43.png", "/static/common/normal_u40.png"],
 			sSFlag: 0,
 			index: 0
@@ -84,7 +85,7 @@ export default {
 			}else{
 				this.page -= 1
 			}
-			resetIndex()
+			this.resetIndex()
 			this.image = this.data[this.page].pag_img
 		},
 		sSradio() {
@@ -133,6 +134,9 @@ export default {
 		},
 		favClick(){
 			this.if_like = !this.if_like
+		},
+		handleSwitchChange(){
+			this.switch_flag = !this.switch_flag
 		},
 		async fetchBookData(){
 			// const response = await fetch('https://your-backend-api.com/login', {

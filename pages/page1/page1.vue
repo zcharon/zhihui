@@ -126,129 +126,119 @@
 </template>
 
 <script>
+import CdTabbar from '@/pages/tabbar/tabbar.vue';
 export default {
-  name: 'DrawingPlatform',
-  data() {
-    return {
-      selectedStyle: '',
-      selectedAge: '',
-      storyText: '',
-      imageUrl: '',
-      characterImageUrl: '',
-    };
-  },
-  methods: {
-    goToHome() {
-      uni.navigateTo({
-        url: '/pages/mainpage/mainpage'
-      });
-    },
-    goToRegions() {
-      this.$router.push({ name: 'Regions' });
-    },
-    goToLibrary() {
-      this.$router.push({ name: 'Library' });
-    },
-    goToFriends() {
-      this.$router.push({ name: 'Friends' });
-    },
-    async generateStory() {
-      try {
-        const response = await fetch('https://your-backend-api.com/generateStory', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            style: this.selectedStyle,
-            age: this.selectedAge
-          })
-        });
+	name: 'DrawingPlatform',
+	components: {
+		CdTabbar
+	},
+	data() {
+		return {
+			selectedStyle: JSON.parse(localStorage.getItem("selectedStyle")),
+			selectedAge: JSON.parse(localStorage.getItem("selectedAge")),
+			storyText: '',
+			imageUrl: '',
+			characterImageUrl: '',
+		};
+	},
+	methods: {
+		async generateStory() {
+			try {
+				const response = await fetch('https://your-backend-api.com/generateStory', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						style: this.selectedStyle,
+						age: this.selectedAge
+					})
+				});
 
-        if (!response.ok) {
-          throw new Error('Story generation failed');
-        }
+				if (!response.ok) {
+					throw new Error('Story generation failed');
+				}
 
-        const data = await response.json();
-        this.storyText = data.storyText;
-        this.imageUrl = data.imageUrl;
-        this.characterImageUrl = data.characterImageUrl;
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while generating the story');
-      }
-    },
-    async modifyStory() {
-      try {
-        const response = await fetch('https://your-backend-api.com/modifyStory', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            storyText: this.storyText
-          })
-        });
+				const data = await response.json();
+				this.storyText = data.storyText;
+				this.imageUrl = data.imageUrl;
+				this.characterImageUrl = data.characterImageUrl;
+			} catch (error) {
+				console.error('Error:', error);
+				alert('An error occurred while generating the story');
+			}
+		},
+		async modifyStory() {
+			try {
+				const response = await fetch('https://your-backend-api.com/modifyStory', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						storyText: this.storyText
+					})
+				});
 
-        if (!response.ok) {
-          throw new Error('Story modification failed');
-        }
+				if (!response.ok) {
+					throw new Error('Story modification failed');
+				}
+				
+				const data = await response.json();
+				this.storyText = data.storyText;
+			} catch (error) {
+				console.error('Error:', error);
+				alert('An error occurred while modifying the story');
+			}
+		},
+		async modifyVoice() {
+			try {
+				const response = await fetch('https://your-backend-api.com/modifyVoice', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+					storyText: this.storyText
+					})
+				});
 
-        const data = await response.json();
-        this.storyText = data.storyText;
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while modifying the story');
-      }
-    },
-    async modifyVoice() {
-      try {
-        const response = await fetch('https://your-backend-api.com/modifyVoice', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            storyText: this.storyText
-          })
-        });
+				if (!response.ok) {
+					throw new Error('Voice modification failed');
+				}
 
-        if (!response.ok) {
-          throw new Error('Voice modification failed');
-        }
+				const data = await response.json();
+			// Handle the modified voice data
+			} catch (error) {
+				console.error('Error:', error);
+				alert('An error occurred while modifying the voice');
+			}
+		},
+		async inputSpeech() {
+			try {
+				const response = await fetch('https://your-backend-api.com/inputSpeech', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+					// Add necessary parameters for speech input
+					})
+				});
 
-        const data = await response.json();
-        // Handle the modified voice data
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while modifying the voice');
-      }
-    },
-    async inputSpeech() {
-      try {
-        const response = await fetch('https://your-backend-api.com/inputSpeech', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            // Add necessary parameters for speech input
-          })
-        });
+				if (!response.ok) {
+					throw new Error('Speech input failed');
+				}
 
-        if (!response.ok) {
-          throw new Error('Speech input failed');
-        }
-
-        const data = await response.json();
-        this.storyText = data.storyText;
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while processing the speech input');
-      }
-    },
-    async makeBook() {
-      // Add your logic for making the book
+				const data = await response.json();
+				this.storyText = data.storyText;
+			} catch (error) {
+				console.error('Error:', error);
+				alert('An error occurred while processing the speech input');
+			}
+		},
+		async makeBook() {
+		// Add your logic for making the book
     }
   }
 };
@@ -542,3 +532,4 @@ export default {
   line-height: normal;
 }
 </style>
+
