@@ -14,6 +14,7 @@
 				</uni-search-bar>
 				<image src="../../static/mianpage/u100.png" style="height: 40px;width: 40px;top: 10px;"></image>
 			</view>
+			
 			<view class="container">
 				<view class="content">
 					<view style="width: 70%">
@@ -21,29 +22,40 @@
 							<image src="../../static/mianpage/normal_u40.png" style="height: 40px;width: 40px;top: 10px;"></image>
 							<text style="width: 92px;height: 40px; font-weight: 700;color: #764711;font-size: 22px;margin-top: 20px;margin-left: 10px;">热门推荐</text>
 						</view>
-						<view style="display: flex;">
+						
+						<view class="card-container"> <!-- 修改类名为 card-container -->
 							<view class="card" v-for="(book, index) in recommendations" :key="index">
-								<view class="img-container">
+								  <view class="img-container">
 									<image :src="book.image_path || '../../static/mianpage/u435.png'" class="img"></image>
-								</view>
-								<view style="margin-top: 15px;margin-left: 15px;">
+								  </view>
+								  
+								  <view style="margin-top: 15px;margin-left: 15px;">
 									<text class="cardtext">{{ book.book_title }}</text>
-								</view>
-								<view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+								  </view>
+								  
+								  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
 									<text class="cardcontent">{{ book.book_abstract }}</text>
-								</view>
-								<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-									<text class="author">{{ book.author }}</text>
-								</view>
-								<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
-									<text class="tag" :style="{ backgroundColor: 'rgba(252, 198, 159, 1)' }">{{ book.recom_age }}</text>
-									<text class="tag" :style="{ backgroundColor: 'rgba(176, 215, 242, 1)' }">{{ book.style }}</text>
-								</view>
+								  </view>
+								  
+								  <view style="display: flex;">
+									  <view style="width: 80%;">
+										  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+											<text class="author">{{ book.author }}</text>
+										  </view>
+										  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+											<text class="tag" :style="{ backgroundColor: 'rgba(252, 198, 159, 1)' }">{{ book.recom_age }}</text>
+											<text class="tag" :style="{ backgroundColor: 'rgba(176, 215, 242, 1)' }">{{ book.style }}</text>
+										  </view>
+									  </view>
+									  <view style="margin-top: 5%;">
+										<uni-fav :checked="!book.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
+									  </view>
+								  </view>
 							</view>
 						</view>
 					</view>
 					<view style="width: 30%;">
-						<view style="margin-left: 25%;margin-right: 25%;margin-top: 20px">
+						<view style="margin-left: 30%;margin-right: 30%;margin-top: 20px">
 							<image src="../../static/mianpage/touxiang.png" class="tx" @click="navigateTo('/pages/image-to-image/image-to-image')"></image>
 						</view>
 						<view style="display: flex;justify-content: center;margin-top: 25px;">
@@ -104,9 +116,17 @@ export default {
 	  viewed_books_num: 0,
       recommendations: [],
 	  my_book_data: [],
+	  contentText: {
+			contentDefault: '点赞',
+			contentFav: '已点赞'
+		}
     };
   },
   methods: {
+    favClick(index) {
+		this.recommendations[index].if_like = !this.recommendations[index].if_like
+		this.$forceUpdate()
+	},
     async fetchUserData() {
       try {
   //       const response = await fetch('https://your-backend-api.com/fetchUserData', {
@@ -207,6 +227,11 @@ export default {
 </script>
 
 <style scoped>
+::v-deep .uni-fav__content-text {
+  font-size: 100px; /* 你希望的字体大小 */
+}
+	
+	
 .container {
   display: flex;
   flex-direction: column;
@@ -236,7 +261,14 @@ export default {
 .content {
   display: flex;
   flex: 1;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 }
+
+
 
 .left-panel {
 		width: 10%;
@@ -364,19 +396,35 @@ export default {
 }
 .container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+}
+
+.card-container {
+/*  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* 卡片之间的间距 */ 
+  
+  display: flex;
+  /* flex: 1; */
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: 49%;  
+  width: calc(48% - 10px); 
   height: auto; 
   background-color: #f6f1ed;
   margin-right: 1em;
   padding: 1em;
   box-sizing: border-box;
 }
+
+
 
 .img-container {
   flex: 1; 
@@ -445,6 +493,13 @@ export default {
   color: rgba(169, 102, 24, 0.76);
   line-height: normal;
 }
+
+.favBtn {
+	width: 1em;
+	height: auto;
+	font-size: 100px;
+}
+
 .tag {
 	display: inline-block;
 	margin-top: 0.5em;

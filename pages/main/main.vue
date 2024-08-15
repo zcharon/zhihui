@@ -15,8 +15,6 @@
 			</view>
 		</view>
 		
-		
-
       <div class="style-selection">	  
         <div class="styles">
 			<radio-group v-model="selectedStyle" name="radio" @change="handleStyleChange">
@@ -156,9 +154,6 @@ header {
 .content {
   margin-top: 20px;
 }
-
-
-
   
 .age-selection {
 	position: absolute; /* 使用绝对定位 */

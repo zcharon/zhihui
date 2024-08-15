@@ -40,23 +40,23 @@ export default {
   methods: {
     async login() {
       try {
-        // const response = await fetch('https://your-backend-api.com/login', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   },
-        //   body: JSON.stringify({
-        //     account: this.account,
-        //     password: this.password
-        //   })
-        // });
+  //       const response = await fetch('https://your-backend-api.com/login', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify({
+  //           account: this.account,
+  //           password: this.password
+  //         })
+  //       });
 
-        // if (!response.ok) {
-        //   throw new Error('Login failed');
-        // }
+  //       if (!response.ok) {
+  //         throw new Error('Login failed');
+  //       }
 
-        // const data = await response.json();
-		// if (data.success) {
+  //       const data = await response.json();
+		// if (data.code == 200) {
         if (true) {
           // Handle successful login (e.g., store token, redirect)
           uni.navigateTo({

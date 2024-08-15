@@ -3,11 +3,11 @@
 	 @click="onClick" class="uni-fav">
 		<!-- #ifdef MP-ALIPAY -->
 		<view class="uni-fav-star" v-if="!checked && (star === true || star === 'true')">
-			<uni-icons :color="fgColor" :style="{color: checked ? fgColorChecked : fgColor}" size="14" type="star-filled" />
+			<uni-icons :color="fgColor" :style="{color: checked ? fgColorChecked : fgColor}" size="35" type="hand-up-filled" />
 		</view>
 		<!-- #endif -->
 		<!-- #ifndef MP-ALIPAY -->
-		<uni-icons :color="fgColor" :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-star" size="14" type="star-filled"
+		<uni-icons :color="fgColor" :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-star" size="35" type="hand-up-filled"
 		 v-if="!checked && (star === true || star === 'true')" />
 		<!-- #endif -->
 		<text :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-text">{{ checked ? contentFav : contentDefault }}</text>
@@ -114,7 +114,7 @@
 </script>
 
 <style lang="scss" >
-	$fav-height: 25px;
+	$fav-height: 50px;
 
 	.uni-fav {
 		/* #ifndef APP-NVUE */
@@ -123,7 +123,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		width: 60px;
+		width: 30px;
 		height: $fav-height;
 		line-height: $fav-height;
 		text-align: center;
@@ -156,6 +156,6 @@
 		line-height: $fav-height;
 		align-items: center;
 		justify-content: center;
-		font-size: 12px;
+		font-size: 1.1rem;
 	}
 </style>

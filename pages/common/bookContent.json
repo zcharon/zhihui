@@ -1,0 +1,40 @@
+{
+  "title": "奉献的草",
+  "author": "刘小年",
+  "age": 4,
+  "gender": "女",
+  "recomm_age": "3-6", 
+  "if_like": false,
+  "data":[
+    {
+      "pag_img":"/pages/common/img/0.webp", 
+      "pag_con": ["小明一路上兴奋地奔跑着，不时停下来观察周围的环境。当他来到城堡的大门前时，发现门是锁着的。", 
+				  "小明: 这可怎么办呢？"], 
+      "pag_radio": ["/pages/common/radio/0_0.wav", "/pages/common/radio/0_1.wav"] 
+    },
+	{
+	  "pag_img":"/pages/common/img/1.webp", 
+	  "pag_con": ["他拿出宝剑，用力砍了几下，门依然纹丝不动。", 
+				  "小明': 哎呀，砍不动啊！"], 
+	  "pag_radio": ["/pages/common/radio/1_0.wav", "/pages/common/radio/1_1.wav"] 
+	},
+	{
+	  "pag_img":"/pages/common/img/2.webp", 
+	  "pag_con": ["这时，他发现门的上方有一个小小的洞口，便拿出地图开始研究。经过一番思考，他终于找到了开门的方法。", 
+				  "小明': 哈哈，我知道怎么开了！"], 
+	  "pag_radio": ["/pages/common/radio/2_0.wav", "/pages/common/radio/2_1.wav"] 
+	},
+	{
+	  "pag_img":"/pages/common/img/3.webp", 
+	  "pag_con": ["小明顺利地进入城堡后，发现了许多隐藏的宝藏和秘密通道。", 
+				  "小明': 哇，这里好多宝藏啊！"], 
+	  "pag_radio": ["/pages/common/radio/3_0.wav", "/pages/common/radio/3_1.wav"] 
+	},
+	{
+	  "pag_img":"/pages/common/img/4.webp", 
+	  "pag_con": ["他与城堡中的各种怪兽进行战斗，勇敢地探索着每一个角落。", 
+				  "小明': 哼，你这只怪兽，还不快滚！"], 
+	  "pag_radio": ["/pages/common/radio/4_0.wav", "/pages/common/radio/4_1.wav"] 
+	}
+  ]
+}

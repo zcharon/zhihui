@@ -77,24 +77,50 @@
 				<text style="color:#704a10;font-weight:bold;font-size:20px;margin-left: 10px;">设定角色形象和声线</text>
 			</view>
 			<view style="display: flex;margin-left: 20px;margin-top: 20px;">
-				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;transform: rotate(180deg);box-sizing: border-box;">
-				<img src="/static/page1/normal_i2_u64.png" style="width: 136px;height: 160px;box-sizing: border-box;">
-				<view style="display: flex; flex-direction: column;">
-					<text style="color:#333333;font-size: 18px;font-weight: bold;">角色名：小明</text>
-					<view style="display: flex;">
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">音色：</text>
+				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;transform: rotate(180deg);box-sizing: border-box;margin-top: 40px;">
+				<img src="/static/page1/normal_i2_u64.png" style="width: 136px;height: 160px;box-sizing: border-box;margin-left:5px;">
+				<view style="display: flex; flex-direction: column;margin-top: 30px;">
+					<view>
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">角色名：</text>
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">小明</text>
 					</view>
-					<view style="display: flex;">
+					<view style="display: flex;margin-top: 10px;">
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">音色：</text>
+						<text style="color:#333333;font-size: 18px;">稳重</text>  <!-- 这里要写选择 -->
+					</view>
+					<view style="display: flex;margin-top: 10px;">
 						<text style="color:#333333;font-size: 18px;font-weight: bold;">音量：</text>
+						<text style="color:#333333;font-size: 18px;">50</text>
+						<img src="/static/page1/normal_u54.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
+						<img src="/static/page1/normal_u53.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
 					</view>
 				</view>
-				<img src="/static/page1/normal_i4_u70.png" style="width: 139px;height: 140px;box-sizing: border-box;">
-				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;box-sizing: border-box;">
+				<img src="/static/page1/normal_i4_u70.png" style="width: 139px;height: 140px;box-sizing: border-box;margin-left:10px;">
+				<view style="display: flex; flex-direction: column;margin-top: 30px;">
+					<view>
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">角色名：</text>
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">妈妈</text>
+					</view>
+					<view style="display: flex;margin-top: 10px;">
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">音色：</text>
+						<text style="color:#333333;font-size: 18px;">甜美</text>  <!-- 这里要写选择 -->
+					</view>
+					<view style="display: flex;margin-top: 10px;">
+						<text style="color:#333333;font-size: 18px;font-weight: bold;">音量：</text>
+						<text style="color:#333333;font-size: 18px;">50</text>
+						<img src="/static/page1/normal_u54.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
+						<img src="/static/page1/normal_u53.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
+					</view>
+				</view>
+				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;box-sizing: border-box;margin-top: 40px;margin-left:5px;">
 			</view>
 		</view>
-<!--        <div class="speech-input">
-          <span>快点击话筒 <img src="@/static/u100.png" alt="microphone" class="icon-microphone"/> 吧</span>
-        </div> -->
+        <div class="speech-input" style="z-index: 10;">
+          <span style="position:absolute; top: 558px;left: 288px;">快 点 击 话 筒 <img src="@/static/u100.png" alt="microphone" style="width: 33px;height: 33px;box-sizing: border-box;"/> 吧 <img src="/static/chat/normal_u45.png" style="width: 19px;height: 19px;box-sizing: border-box;margin-left: 10px;"></span>
+        </div>
+		<view class="element4" style="z-index: 5;position:absolute; top: 662px;left: 532px;">
+			<text style="box-sizing: border-box;align-items: center;justify-content: center;font-size: 20px;font-weight: bold;position:absolute; top: 22px;left: 25px;">生 成</text>
+		</view>
 	</div>
   </div>
 </template>
@@ -260,14 +286,6 @@ export default {
   flex: 1;
 }
 
-.left-panel {
-  width: 20%;
-  background-color: #ffefe4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-}
 
 .menu {
   flex: 1;
@@ -508,5 +526,19 @@ export default {
   color: #333333;
   text-align: center;
   line-height: 25px;
+}
+
+.element4 {
+  width: 92px;
+  height: 74px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 12px;
+  background-color: #dc851f;
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: normal;
 }
 </style>

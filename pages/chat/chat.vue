@@ -33,6 +33,8 @@
 					</view>
 					<img src="/static/common/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
 					<img src="/static/common/normal_u40.png" style="width: 35px;height: 35px;box-sizing: border-box;margin-left:10px;">
+					<img src="/static/common/normal_u30.svg" style="margin-left: 30px;width: 32px;height: 31px;">
+					<img src="/static/common/normal_thumb_icon_u27.svg" style="margin-left: 20px;width: 32px;height: 31px;">
 				</view>
 			</view>
 			<view class="rectangle2" style="margin-top: 10px;">
@@ -85,8 +87,13 @@
 </template>
 
 <script>
+import CdTabbar from '@/pages/tabbar/tabbar.vue';
+
 export default {
   name: 'App',
+  components: {
+  	CdTabbar
+  },
   data() {
     return {
       messages: [],
