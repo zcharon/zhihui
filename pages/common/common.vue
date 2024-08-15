@@ -11,8 +11,11 @@
 					<text class="tag" style="background-color: rgba(242, 176, 176, 1);font-size: 16px;">{{gender}}生</text>
 					<text class="tag" style="background-color: rgba(252, 198, 159, 1);font-size: 16px;">{{recomm_age}}岁</text>
 				</view>
-				<img src="/static/common/normal_u30.svg" class="shape" style="margin-left: 30px;width: 32px;height: 31px;">
-				<img src="/static/common/normal_thumb_icon_u27.svg" class="thumb-icon" style="margin-left: 20px;width: 32px;height: 31px;">
+				<view style="margin-top: 5%;">
+					<uni-fav :checked="!this.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
+				</view>
+				<!-- <img src="/static/common/normal_u30.svg" class="shape" style="margin-left: 30px;width: 32px;height: 31px;">
+				<img src="/static/common/normal_thumb_icon_u27.svg" class="thumb-icon" style="margin-left: 20px;width: 32px;height: 31px;"> -->
 		  </view>
 		  <img :src="image" alt="Beautiful Tree" style="width: 1102px;height: 551px;box-sizing: border-box;"/>
 		  <text style="margin-top:20px; text-align: center;line-height: center;">{{content}}</text>

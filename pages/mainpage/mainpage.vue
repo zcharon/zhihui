@@ -25,32 +25,32 @@
 						
 						<view class="card-container"> <!-- 修改类名为 card-container -->
 							<view class="card" v-for="(book, index) in recommendations" :key="index">
-								  <view class="img-container">
+								<view class="img-container">
 									<image :src="book.image_path || '../../static/mianpage/u435.png'" class="img"></image>
-								  </view>
+								</view>
 								  
-								  <view style="margin-top: 15px;margin-left: 15px;">
+								<view style="margin-top: 15px;margin-left: 15px;">
 									<text class="cardtext">{{ book.book_title }}</text>
-								  </view>
+								</view>
 								  
-								  <view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
+								<view style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
 									<text class="cardcontent">{{ book.book_abstract }}</text>
-								  </view>
+								</view>
 								  
-								  <view style="display: flex;">
-									  <view style="width: 80%;">
-										  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+								<view style="display: flex;">
+									<view style="width: 80%;">
+										<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
 											<text class="author">{{ book.author }}</text>
-										  </view>
-										  <view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
+										</view>
+										<view style="margin-top: 10px;margin-left: 15px;margin-right: 15px;">
 											<text class="tag" :style="{ backgroundColor: 'rgba(252, 198, 159, 1)' }">{{ book.recom_age }}</text>
 											<text class="tag" :style="{ backgroundColor: 'rgba(176, 215, 242, 1)' }">{{ book.style }}</text>
-										  </view>
-									  </view>
-									  <view style="margin-top: 5%;">
+										</view>
+									</view>
+									<view style="margin-top: 5%;">
 										<uni-fav :checked="!book.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
-									  </view>
-								  </view>
+									</view>
+								</view>
 							</view>
 						</view>
 					</view>
