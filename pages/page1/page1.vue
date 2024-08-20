@@ -15,111 +15,137 @@
 			</view>
 		</view>
 		<view class="left-page" style="position:absolute; top: 169px;left: 164px;">
-				<!-- <img src="/static/chat/normal_u41.svg" class="rectangle" style="margin-left: 753px;margin-top:30px;"> -->
+			<!-- <img src="/static/chat/normal_u41.svg" class="rectangle" style="margin-left: 753px;margin-top:30px;"> -->
 <!-- 				<img src="/static/chat/normal_u41.svg" class="rectangle" style="position:absolute; top: 169px;left: 164px;"> -->
-				<!-- <view style="z-index: 2;  position: absolute; top: 169px;left: 185px;"> -->
-				<view style="z-index: 2; margin-left:10px;margin-top: 10px;">
-					<view>
-						<view  style="margin-left:10px;margin-top: 10px;">
-							<img src="/static/chat/normal_u12.png" style="width: 53px;height: 65px;box-sizing: border-box;">
-							<img src="/static/chat/normal_u44.svg" class="element2">
-						</view>
-						<view style="z-index: 3;display:flex;position:absolute; top: 30px;left: 90px;">
-							<text >这个好好看</text>
-							<img src="/static/chat/normal_u45.png" style="width: 19px;height: 19px;box-sizing: border-box;margin-left: 150px;">
-						</view>
-					</view>
-					<view style="margin-left:10px;margin-top: 10px;">
-						<view>
-							<img src="/static/chat/normal_u48.png" style="width: 53px;height: 55px;box-sizing: border-box;">
-							<img src="/static/chat/normal_u44.svg" class="element2" >
-						</view>
-						<view style="z-index: 3; display:flex;position:absolute; top: 115px;left: 90px;">
-							<text>我也觉得</text>
-							<img src="/static/chat/normal_u45.png" style="width: 19px;height: 19px;box-sizing: border-box;margin-left: 165px;">
-						</view>	
-					</view>
-					<view>
-						<view class="text-field" style=" position:absolute; top: 740px;left: 25px;">
-							<text>input text</text>
-						</view>
-						<view>
-							<img src="/static/chat/normal_u46.png" style="width: 93px;height: 93px;box-sizing: border-box;position:absolute; top: 685px;left: 285px;">
-						</view>
-					</view>
-				</view>
+			<!-- <view style="z-index: 2;  position: absolute; top: 169px;left: 185px;"> -->
+			<view style="z-index: 2; margin-left: 10px; margin-top: 10px;">
+			    <!-- 遍历输出聊天记录 -->
+			    <block v-for="(message, index) in output_" :key="index">
+			        <view :style="{ marginTop: index === 0 ? '10px' : '20px', marginBottom: '50px', position: 'relative', display: 'flex', alignItems: 'flex-start' }">
+			            <!-- 当前用户信息 -->
+			            <view v-if="index % 2 === 0" style="display: flex; align-items: flex-start;">
+			                <view style="margin-left: 10px; position: relative; flex-grow: 1;">
+			                    <view style="padding: 10px; border-radius: 10px; max-width: var(--svg-width); position: relative; z-index: 1; background-color: transparent; word-wrap: break-word;">
+			                        <text>{{ message }}</text>
+			                    </view>
+			                    <img src="/static/chat/normal_u44.svg" style="position: absolute; top: 0; left: 0; z-index: 0; width: var(--svg-width); height: auto;">
+			                    <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; position: absolute; top: 5px; right: -25px; z-index: 1;">
+			                </view>
+			            </view>
+			    
+			            <!-- 机器人信息 -->
+			            <view v-else style="display: flex; align-items: flex-start;">
+			                <view style="margin-left: 10px; position: relative; flex-grow: 1;">
+			                    <view style="padding: 10px; border-radius: 10px; max-width: var(--svg-width); position: relative; z-index: 1; background-color: transparent; word-wrap: break-word;">
+			                        <text>{{ message }}</text>
+			                    </view>
+			                    <img src="/static/chat/normal_u44.svg" style="position: absolute; top: 0; left: 0; z-index: 0; width: var(--svg-width); height: auto;">
+			                    <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; position: absolute; top: 5px; right: -25px; z-index: 1;">
+			                </view>
+			            </view>
+			        </view>
+			    </block>
+
+			
+			    <!-- 输入框及发送按钮 -->
+			    <view>
+			        <view class="text-field" style="position: absolute; top: 740px; left: 25px;">
+			          <input  type="text"  v-model="user_input" @keypress.enter="inputInput" placeholder="input text" 
+			            style="width: 200px; height: 30px;"/>
+			        </view>
+			        <view @click="audioRecord">
+			          <img 
+			            src="/static/chat/normal_u46.png" 
+			            style="width: 93px; height: 93px; box-sizing: border-box; position: absolute; top: 685px; left: 285px;" />
+			        </view>
+			      </view>
+			</view>
 		</view>
 		<view class="rectangle3" style="position:absolute; top: 169px;left: 594px;">
 			<view style="display:flex; width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: 20px;">
 				<img src="/static/page1/normal_u18.png" style="width: 29px;height: 29px;box-sizing: border-box;">
-				<text style="color:#704a10;font-weight:bold;font-size:20px;margin-left: 10px;">小明去城堡冒险</text>
+				<text style="color:#704a10;font-weight:bold;font-size:20px;margin-left: 10px;">{{title}}</text>
 				<img src="/static/page1/normal_u23.png" style="width: 22px;height: 22px;box-sizing: border-box;margin-left: 10px;">
 			</view>
-			<view>
-				<img src="/static/page1/normal_u71.png" style="width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: -290px;">
+			<view v-if="image !== ''" >
+				<img :src="image" style="width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: -290px;">
 			</view>
 			<view class="element3" style="margin-left: 20px;">
-				<text style="box-sizing: border-box;text-align: center;line-height: center;">小明一直对城堡的历史和传说很感兴趣，所以他决定来一次城堡探险。</text>
+				<text style="box-sizing: border-box;text-align: center;line-height: center;">{{content}}</text>
 			</view>
 			<view style="margin-left:215px;margin-top:40px;display: flex;">
-				<img src="/static/common/normal_u41.png" style="width: 35px;height: 35px;box-sizing: border-box;">
-				<img src="/static/common/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(270deg);margin-left:10px;">
+				<img src="/static/common/normal_u41.png" 
+				     @click="image !== '' && resetIndex()" 
+				     style="width: 35px;height: 35px;box-sizing: border-box;">
+				
+				<img src="/static/common/normal_u36.png" 
+				     @click="image !== '' && deletePage()" 
+				     style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(270deg);margin-left:10px;">
+					 
 				<view style="display: flex;">
 					<text style="font-weight:bold;font-size: 20px;margin-left:25px">第</text>
-					<text style="color:#dc851f;font-weight:bold;font-size: 20px;margin-left:10px">1</text>
+					<text style="color:#dc851f;font-weight:bold;font-size: 20px;margin-left:10px">{{page+1}}</text>
 					<text style="font-weight:bold;font-size: 20px;margin-left:10px">页</text>
 				</view>
-				<img src="/static/common/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
-				<img src="/static/common/normal_u40.png" style="width: 35px;height: 35px;box-sizing: border-box;margin-left:10px;">
+				<img src="/static/common/normal_u36.png" 
+				     @click="image !== '' && addPage()" 
+				     style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
+				
+				<img :src="sSicon[sSFlag]" 
+				     @click="image !== '' && sSradio()" 
+				     style="width: 35px;height: 35px;box-sizing: border-box;margin-left:10px;">
+
 			</view>
 			<view style="display: flex;margin-left: 20px;margin-top: 20px;">
 				<img src="/static/page1/normal_u36.png" style="width: 30px;height: 30px;box-sizing: border-box;">
 				<text style="color:#704a10;font-weight:bold;font-size:20px;margin-left: 10px;">设定角色形象和声线</text>
 			</view>
-			<view style="display: flex;margin-left: 20px;margin-top: 20px;">
-				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;transform: rotate(180deg);box-sizing: border-box;margin-top: 40px;">
-				<img src="/static/page1/normal_i2_u64.png" style="width: 136px;height: 160px;box-sizing: border-box;margin-left:5px;">
-				<view style="display: flex; flex-direction: column;margin-top: 30px;">
+			<view v-for="(image, roleName) in role" :key="roleName" style="display: flex; margin-left: 20px; margin-top: 20px;">
+			    <img src="/static/page1/normal_u33.png"
+					style="width: 54px; height: 54px; transform: rotate(180deg); box-sizing: border-box; margin-top: 40px;"/>
+			    <img :src="image"
+					style="width: 136px; height: 160px; box-sizing: border-box; margin-left: 5px;"/>
+			    <view style="display: flex; flex-direction: column; margin-top: 30px;">
 					<view>
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">角色名：</text>
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">小明</text>
+						<text style="color:#333333; font-size: 18px; font-weight: bold;">角色名：</text>
+						<text style="color:#333333; font-size: 18px; font-weight: bold;">{{roleName}}</text>
 					</view>
-					<view style="display: flex;margin-top: 10px;">
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">音色：</text>
-						<text style="color:#333333;font-size: 18px;">稳重</text>  <!-- 这里要写选择 -->
+					<view style="display: flex; margin-top: 10px;">
+					    <text style="color:#333333; font-size: 18px; font-weight: bold;">音色：</text>
+					    <picker mode="selector" :range="['甜美', '稳重','温柔','浑厚','成熟','磁性','大气']" :value="selectedVoice[roleName]"
+					        @change="onVoiceChange($event, roleName)">
+							<view style="color:#333333; font-size: 18px;">{{selectedVoice[roleName]}}</view>
+					    </picker>
 					</view>
-					<view style="display: flex;margin-top: 10px;">
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">音量：</text>
-						<text style="color:#333333;font-size: 18px;">50</text>
-						<img src="/static/page1/normal_u54.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
-						<img src="/static/page1/normal_u53.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
+					<view style="display: flex; margin-top: 10px;">
+						<text style="color:#333333; font-size: 18px; font-weight: bold;">音量：</text>
+						<text style="color:#333333; font-size: 18px;">{{ format_story_cotent[1][roleName].音量 }}</text>
+						<img src="/static/page1/normal_u54.png"
+							@click="increaseVolume(roleName)"
+							style="width: 18px; height: 18px; box-sizing: border-box; margin-left: 5px;"/>
+						<img src="/static/page1/normal_u53.png"
+							@click="decreaseVolume(roleName)"
+							style="width: 18px; height: 18px; box-sizing: border-box; margin-left: 5px;"/>
 					</view>
-				</view>
-				<img src="/static/page1/normal_i4_u70.png" style="width: 139px;height: 140px;box-sizing: border-box;margin-left:10px;">
-				<view style="display: flex; flex-direction: column;margin-top: 30px;">
-					<view>
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">角色名：</text>
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">妈妈</text>
-					</view>
-					<view style="display: flex;margin-top: 10px;">
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">音色：</text>
-						<text style="color:#333333;font-size: 18px;">甜美</text>  <!-- 这里要写选择 -->
-					</view>
-					<view style="display: flex;margin-top: 10px;">
-						<text style="color:#333333;font-size: 18px;font-weight: bold;">音量：</text>
-						<text style="color:#333333;font-size: 18px;">50</text>
-						<img src="/static/page1/normal_u54.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
-						<img src="/static/page1/normal_u53.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
-					</view>
-				</view>
-				<img src="/static/page1/normal_u33.png" style=" width: 54px;height: 54px;box-sizing: border-box;margin-top: 40px;margin-left:5px;">
+			    </view>
+			    <img src="/static/page1/normal_u33.png"
+					style="width: 54px; height: 54px; box-sizing: border-box; margin-top: 40px; margin-left: 5px;"/>
 			</view>
 		</view>
-        <div class="speech-input" style="z-index: 10;">
-          <span style="position:absolute; top: 558px;left: 288px;">快 点 击 话 筒 <img src="@/static/u100.png" alt="microphone" style="width: 33px;height: 33px;box-sizing: border-box;"/> 吧 <img src="/static/chat/normal_u45.png" style="width: 19px;height: 19px;box-sizing: border-box;margin-left: 10px;"></span>
-        </div>
-		<view class="element4" style="z-index: 5;position:absolute; top: 662px;left: 532px;">
-			<text style="box-sizing: border-box;align-items: center;justify-content: center;font-size: 20px;font-weight: bold;position:absolute; top: 22px;left: 25px;">生 成</text>
+		<div v-if="!output_ || output_.length === 0" class="speech-input" style="z-index: 10;">
+		      <span style="position: absolute; top: 558px; left: 288px;">
+		        快 点 击 话 筒 
+		        <img src="@/static/u100.png" alt="microphone" style="width: 33px; height: 33px; box-sizing: border-box;"/> 
+		        吧 
+		        <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; margin-left: 10px;">
+		      </span>
+		    </div>
+		<view class="element4" 
+		      style="z-index: 5;position:absolute; top: 662px;left: 532px;"
+		      @click="format_story_cotent.length > 0 ? generatePicBook() : null">
+		    <text style="box-sizing: border-box;align-items: center;justify-content: center;font-size: 20px;font-weight: bold;position:absolute; top: 22px;left: 25px;">
+		        生 成
+		    </text>
 		</view>
 	</div>
   </div>
@@ -136,82 +162,151 @@ export default {
 		return {
 			selectedStyle: JSON.parse(localStorage.getItem("selectedStyle")),
 			selectedAge: JSON.parse(localStorage.getItem("selectedAge")),
-			storyText: '',
-			imageUrl: '',
-			characterImageUrl: '',
+			story_messages: [],
+			script_messages: [],
+			format_story_cotent: [],
+			format_script_content: [],
+			data: [],
+			role: {},
+			output_: [],
+			selectedVoice: {},
+			radio_record: false,
+			audioContext: null,
+			audioSource: null,
+			audioChunks: [],
+			user_input: "",
+			func_id: 0,
+			input_: "",
+			username:"",
+			title: "",
+			page: -1,
+			content: "",
+			image: "",
+			audio: null,
+			sSFlag: 0,
+			index: 0,
+			sSicon: ["/static/common/normal_u43.png", "/static/common/normal_u40.png"],
 		};
 	},
 	methods: {
-		async generateStory() {
+		async generatePicBook() {
 			try {
-				const response = await fetch('https://your-backend-api.com/generateStory', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						style: this.selectedStyle,
-						age: this.selectedAge
-					})
-				});
+				// const response = await fetch('https://your-backend-api.com/generateStory', {
+				// 	method: 'POST',
+				// 	headers: {
+				// 		'Content-Type': 'application/json'
+				// 	},
+				// 	body: JSON.stringify({
+				// 		style: this.selectedStyle,
+				// 		age: this.selectedAge
+				// 	})
+				// });
 
+				// if (!response.ok) {
+				// 	throw new Error('Story generation failed');
+				// }
+				
+				// const data = await response.json();
+				const response = await fetch('/pages/page1/comics.json');
+				const response_data = await response.json();
 				if (!response.ok) {
-					throw new Error('Story generation failed');
+					throw new Error('Failed to fetch mock data');
 				}
-
-				const data = await response.json();
-				this.storyText = data.storyText;
-				this.imageUrl = data.imageUrl;
-				this.characterImageUrl = data.characterImageUrl;
+				this.data = response_data.data.data
+				this.title = response_data.data.title
+				this.role = response_data.data.role
+				this.page = -1
+				this.addPage()
+				this.resetIndex()
+				// 使用 for 循环遍历所有角色名
+				var roleNames = Object.keys(this.role)
+				for (let i = 0; i < roleNames.length; i++) {
+					const roleName = roleNames[i];
+					this.$set(this.selectedVoice, roleName, this.format_story_cotent[1][roleName].音色);
+				}
 			} catch (error) {
 				console.error('Error:', error);
 				alert('An error occurred while generating the story');
 			}
 		},
-		async modifyStory() {
-			try {
-				const response = await fetch('https://your-backend-api.com/modifyStory', {
-					method: 'POST',
-					headers: {
-					'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						storyText: this.storyText
-					})
-				});
-
-				if (!response.ok) {
-					throw new Error('Story modification failed');
-				}
-				
-				const data = await response.json();
-				this.storyText = data.storyText;
-			} catch (error) {
-				console.error('Error:', error);
-				alert('An error occurred while modifying the story');
-			}
+		async onVoiceChange(event, roleName) {
+			const newVoiceIndex = event.detail.value;
+			var voice = ['甜美', '稳重','温柔','浑厚','成熟','磁性','大气']
+			this.$set(this.selectedVoice, roleName, voice[newVoiceIndex]);
+			this.format_story_cotent[1][roleName]['音色'] = voice[newVoiceIndex]
 		},
-		async modifyVoice() {
+		async increaseVolume(roleName) {
+			let volume_int = parseInt(this.format_story_cotent[1][roleName].音量)
+			if (volume_int < 100) { // 假设音量最大值为100
+				volume_int += 1
+			}
+			this.format_story_cotent[1][roleName].音量 = volume_int.toString()
+		},
+		async decreaseVolume(roleName){
+			let volume_int = parseInt(this.format_story_cotent[1][roleName].音量)
+			if (volume_int >= 0) { // 假设音量最大值为100
+				volume_int -= 1
+			}
+			this.format_story_cotent[1][roleName].音量 = volume_int.toString()
+		},
+		async inputInput() {
 			try {
-				const response = await fetch('https://your-backend-api.com/modifyVoice', {
-					method: 'POST',
-					headers: {
-					'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-					storyText: this.storyText
-					})
-				});
-
+				// const response = await fetch('https://your-backend-api.com/inputSpeech', {
+				// 	method: 'POST',
+				// 	headers: {
+				// 	'Content-Type': 'application/json'
+				// 	},
+				// 	body: JSON.stringify({
+				// 	// Add necessary parameters for speech input
+				// 	})
+				// });
+				// if (!response.ok) {
+				// 	throw new Error('Speech input failed');
+				// }
+				// const data = await response.json();
+				this.input_ = this.user_input
+				this.user_input = "input text"
+				this.output_.push(this.input_)
+				const response = await fetch('/pages/page1/LLMstory.json');
+				const reaponse_data = await response.json();
 				if (!response.ok) {
-					throw new Error('Voice modification failed');
+					throw new Error('Failed to fetch mock data');
 				}
-
-				const data = await response.json();
-			// Handle the modified voice data
+				var data = reaponse_data.data
+				this.story_messages = data.story_messages
+				this.script_messages = data.script_messages
+				this.format_script_content = data.format_script_content
+				this.format_story_cotent = data.format_story_cotent
+				this.data = data.data
+				this.func_id = data.func_id
 			} catch (error) {
 				console.error('Error:', error);
-				alert('An error occurred while modifying the voice');
+				alert('An error occurred while processing the speech input');
+			}
+			if(this.func_id == 0){  // 剧本创造
+				this.output_.push(this.format_story_cotent[2])
+			}else if(this.func_id == 1){  // 角色修改
+				let text = ""
+				for (const name in this.format_story_cotent[1]) {
+				    if (this.format_story_cotent[1].hasOwnProperty(name)) {
+				        const appearance = this.format_story_cotent[1][name]["外貌形象"];
+				        const tone = this.format_story_cotent[1][name]["音色"];
+				        text += `${name}: ${appearance}音色${tone};\n`
+				    }
+				}
+				text = text.replace(/;\n$/, '。');
+				this.output_.push(`角色形象已经修改为:\n${text}`)
+			}else if(this.func_id == 2){  // 剧本故事修改
+				this.output_.push(`绘本故事已经修改为: ${this.format_story_cotent[2]}`)
+			}else if(this.func_id == 3){  // 绘本页修改
+				let text = ""
+				for (let i = 0; i < this.format_script_content.length; i++) {
+					text += `第${i+1}页:${this.format_script_content[i]["场景描述"]}\n`
+				}
+				text = text.replace(/;\n$/, '')
+				this.output_.push(`绘本页已经修改为:\n${text}`)
+			}else{  // 后台未能做出正确反应
+				this.output_.push("对不起，我没有听清你的意思，你可以再说一遍吗")
 			}
 		},
 		async inputSpeech() {
@@ -237,10 +332,130 @@ export default {
 				alert('An error occurred while processing the speech input');
 			}
 		},
-		async makeBook() {
-		// Add your logic for making the book
-    }
-  }
+		async addPage(){
+			if (this.page < this.data.length - 1) {
+			    this.page += 1; 
+			}else{
+				this.page  = 0
+			}
+			this.resetIndex()
+			this.image = this.data[this.page].pag_img
+		},
+		async deletePage(){
+			if (this.page <= 0){
+				this.page = this.data.length - 1
+			}else{
+				this.page -= 1
+			}
+			this.resetIndex()
+			this.image = this.data[this.page].pag_img
+		},
+		sSradio() {
+		    if (this.sSFlag == 0) {
+		        this.sSFlag = 1;
+		        this.playNextAudio();
+		    } else {
+		        this.sSFlag = 0;
+		        this.audio.pause();  // 暂停音频
+		        this.audio.currentTime = 0;  // 重置播放时间
+		    }
+		},
+		playNextAudio() {
+		    if (this.index < this.data[this.page].pag_radio.length) {
+		        // 播放当前音频
+		        this.audio = new Audio(this.data[this.page].pag_radio[this.index]);
+		        
+		        // 监听音频播放完毕事件
+		        this.audio.addEventListener('ended', () => {
+		            this.index++;
+		            if (this.index < this.data[this.page].pag_radio.length) {
+		                this.content = this.data[this.page].pag_con[this.index];
+		                this.playNextAudio(); // 播放下一个音频
+		            } else {
+		                // 所有音频播放完毕后，设置 sSFlag 为 0 并保持 index 在最后一个
+		                this.sSFlag = 0;
+		                this.index = this.data[this.page].pag_radio.length - 1; // 保持在最后一个音频的索引
+		            }
+		        });
+		        
+		        this.audio.play();
+		    } else {
+		        // 如果没有音频可以播放，直接设置 sSFlag 为 0 并保持 index 在最后一个
+		        this.sSFlag = 0;
+		        this.index = this.data[this.page].pag_radio.length - 1; // 保持在最后一个音频的索引
+		    }
+		},
+		async resetIndex() {
+		    this.index = 0;  // 归零 index
+			this.content = this.data[this.page].pag_con[this.index]; 
+		    this.sSFlag = 0;  // 重置播放状态
+		    if (this.audio) {
+		        this.audio.pause();  // 暂停音频
+		        this.audio.currentTime = 0;  // 重置播放时间
+		    }
+		},
+		async audioRecord(){
+			if(this.radio_record == false){
+				this.startRecording()
+				this.radio_record = true
+			}else{
+				this.stopRecording()
+				this.radio_record = false
+			}
+		},
+		startRecording() {
+		    navigator.mediaDevices.getUserMedia({ audio: true })
+		    .then(stream => {
+		        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		        this.mediaRecorder = new MediaRecorder(stream);
+		        this.audioChunks = [];
+		
+		        this.mediaRecorder.ondataavailable = event => {
+		            this.audioChunks.push(event.data);
+		        };
+		
+		        this.mediaRecorder.start();
+		    })
+		    .catch(error => {
+		        console.error('无法获取麦克风权限:', error);
+		    });
+		},
+		stopRecording() {
+		    if (this.mediaRecorder) {
+		        this.mediaRecorder.stop();
+		        this.mediaRecorder.onstop = () => {
+					const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+					this.sendAudioToServer(audioBlob);
+		        };
+		      }
+		    if (this.audioContext) {
+				this.audioContext.close();
+		    }
+		},
+		sendAudioToServer(audioBlob) {
+		    const formData = new FormData();
+		    formData.append('audio', audioBlob, 'recording.wav');
+		
+		    fetch('YOUR_BACKEND_URL', {
+		        method: 'POST',
+		        body: formData,
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        console.log('服务器返回的数据:', data);
+		    })
+		    .catch(error => {
+		        console.error('发送音频到服务器失败:', error);
+		    });
+		},
+		beforeDestroy() {
+		    this.stopRecording();
+		}
+	},
+	mounted() {
+		
+	}
+
 };
 </script>
 
