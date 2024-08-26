@@ -26,7 +26,7 @@
 						<view class="card-container"> <!-- 修改类名为 card-container -->
 							<view class="card" v-for="(book, index) in recommendations" :key="index">
 								<view class="img-container">
-									<image :src="book.image_path || '../../static/mianpage/u435.png'" class="img"></image>
+									<image :src="`${BASE_URL}${book.image_path}`" class="img"></image>
 								</view>
 								  
 								<view style="margin-top: 15px;margin-left: 15px;">
@@ -48,7 +48,7 @@
 										</view>
 									</view>
 									<view style="margin-top: 5%;">
-										<uni-fav :checked="!book.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
+										<uni-fav :checked="book.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
 									</view>
 								</view>
 							</view>
@@ -82,7 +82,7 @@
 						<view class="intro" v-for="(book, index) in my_book_data" :key="index">
 							<view class="minicard">
 								<view class="img-container">
-									<image :src="book.image_path || '../../static/u446.png'" class="img" @click="navigateTo('/pages/common/common')"></image>
+									<image :src="`${BASE_URL}${book.image_path}`"  class="img" @click="navigateTo('/pages/common/common', book.comic_id)"></image>
 								</view>
 								<view style="margin-top: 5px;margin-left: 5px;">
 									<text class="cardtext">{{book.book_title}}</text>
@@ -102,6 +102,7 @@
 
 <script>
 import CdTabbar from '@/pages/tabbar/tabbar.vue';
+import {BASE_URL} from "@/config.js";
 
 export default {
   name: 'DrawingPlatform',
@@ -110,6 +111,7 @@ export default {
   },
   data() {
     return {
+	  BASE_URL,
 	  user_name: "",
 	  user_age: "",
 	  create_books_num: 0,
@@ -140,15 +142,16 @@ export default {
   //         throw new Error('Failed to fetch book data');
   //       }
     
-  //       const data = await response.json();
+  //       const response_data = await response.json();
+		// var data = response_data.data
   //       this.user_name = data.user_name;
 		// this.user_age = data.user_age;
 		// this.create_books_num = data.create_books_num;
 		// this.viewed_books_num = data.viewed_books_num;
 		const response = await fetch('/pages/mainpage/userData.json');
-				  if (!response.ok) {
-					throw new Error('Failed to fetch mock data');
-				  }
+		if (!response.ok) {
+			throw new Error('Failed to fetch mock data');
+		}
 		const data = await response.json();
 		this.user_name = data.user_name;
 		this.user_age = data.user_age;
@@ -161,26 +164,30 @@ export default {
     },
 	async fetchMyBooksData() {
       try {
-  //       const response = await fetch('https://your-backend-api.com/fetchBookData', {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         }
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch book data');
-  //       }
+        const response = await fetch(`${BASE_URL}/story/fetchMyBooksData`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+		  body: JSON.stringify({
+		    user_id: 2,
+		  })
+        });
 		
-  //       const data = await response.json();
-  //       this.my_book_data = data.data;
-	  const response = await fetch('/pages/mainpage/myBookData.json');
-		  if (!response.ok) {
-			throw new Error('Failed to fetch mock data');
-		  }
+        if (!response.ok) {
+          throw new Error('Failed to fetch book data');
+        }
+		
+        const data = await response.json();
+		console.log(data)
+        this.my_book_data = data.data;
+	  // const response = await fetch('/pages/mainpage/myBookData.json');
+		 //  if (!response.ok) {
+			// throw new Error('Failed to fetch mock data');
+		 //  }
 	  
-	  const data = await response.json();
-	  this.my_book_data = data.data;
+	  // const data = await response.json();
+	  // this.my_book_data = data.data;
       } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching book data');
@@ -188,34 +195,38 @@ export default {
     },
     async fetchRecommendedBooksData() {
       try {
-        // const response = await fetch('https://your-backend-api.com/fetchRecommendedBooksData', {
-        //   method: 'GET',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   }
-        // });
+        const response = await fetch(`${BASE_URL}/story/fetchRecommendedBooksData`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
 
-        // if (!response.ok) {
-        //   throw new Error('Failed to fetch recommended books');
-        // }
+        if (!response.ok) {
+          throw new Error('Failed to fetch recommended books');
+        }
 
-        // const data = await response.json();
-        // this.recommendations = data.data;
-		const response = await fetch('/pages/mainpage/recommodationBooksData.json');
-		    if (!response.ok) {
-		      throw new Error('Failed to fetch mock data');
-		    }
+        const data = await response.json();
+        this.recommendations = data.data.data;
+		// const response = await fetch('/pages/mainpage/recommodationBooksData.json');
+		//     if (!response.ok) {
+		//       throw new Error('Failed to fetch mock data');
+		//     }
 		
-		const data = await response.json();
-		this.recommendations = data.data;
+		// const data = await response.json();
+		// this.recommendations = data.data;
       } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching recommended books');
       }
     },
-	navigateTo(path) {
-		// console.log(JSON.parse(localStorage.getItem("selectedStyle")));
-		this.$router.push(path);
+	navigateTo(path, comic_id) {
+		this.$router.push({
+		    path: path,
+		    query: {
+		      comic_id: comic_id
+		    }
+		});
 	}
   },
   async mounted() {

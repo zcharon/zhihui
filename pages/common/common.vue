@@ -3,6 +3,17 @@
 	<view class="left-panel">
 		<cd-tabbar></cd-tabbar>
 	</view>
+	<!-- 提示窗示例 -->
+	<!-- <view>
+		<button class="popup-success" @click="dialogToggle('success')">
+			<text class="success-text">成功</text>
+		</button>
+	</view> -->
+	<uni-popup ref="alertDialog" type="dialog">
+		<uni-popup-dialog :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="用户xxx邀请您进入聊天室" @confirm="dialogConfirm"
+			@close="dialogClose">
+		</uni-popup-dialog>
+	</uni-popup>
 	<view class="content">
 		  <view style="margin-top:20px;margin-bottom:20px;margin-left:30px;display: flex;">
 				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 22px;">{{title}}</text>
@@ -11,25 +22,36 @@
 					<text class="tag" style="background-color: rgba(242, 176, 176, 1);font-size: 16px;">{{gender}}生</text>
 					<text class="tag" style="background-color: rgba(252, 198, 159, 1);font-size: 16px;">{{recomm_age}}岁</text>
 				</view>
-				<view style="margin-top: 5%;">
+				<!-- <view style="margin-top: 5%;">
 					<uni-fav :checked="!this.if_like" class="favBtn" :circle="true" :content-text="contentText" @click="favClick(index)" bgColorChecked="#d15353"/>
-				</view>
-				<!-- <img src="/static/common/normal_u30.svg" class="shape" style="margin-left: 30px;width: 32px;height: 31px;">
-				<img src="/static/common/normal_thumb_icon_u27.svg" class="thumb-icon" style="margin-left: 20px;width: 32px;height: 31px;"> -->
+				</view> -->
+				<img src="/static/common/normal_u30.svg" class="shape" style="margin-left: 30px;width: 32px;height: 31px;">
+				<img src="/static/common/normal_thumb_icon_u27.svg" class="thumb-icon" style="margin-left: 20px;width: 32px;height: 31px;">
 		  </view>
-		  <img :src="image" alt="Beautiful Tree" style="width: 1102px;height: 551px;box-sizing: border-box;"/>
+		  <img 
+			:src="`${BASE_URL}${image}`" 
+			alt="Beautiful Tree" style="width: 1102px;height: 551px;box-sizing: border-box;"/>
 		  <text style="margin-top:20px; text-align: center;line-height: center;">{{content}}</text>
 		  <view style="margin-top:30px;display: flex;">
 			<view style="margin-left:380px;display: flex;">
-				<img src="/static/common/normal_u41.png"  @click="resetIndex()" style="width: 35px;height: 35px;box-sizing: border-box;">
-				<img src="/static/common/normal_u36.png" @click="deletePage()" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(270deg);margin-left:5px;">
+				<img src="/static/common/normal_u41.png"  
+					@click="resetIndex()" 
+					style="width: 35px;height: 35px;box-sizing: border-box;">
+				<img src="/static/common/normal_u36.png" 
+					@click="deletePage()" 
+					style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(270deg);margin-left:5px;">
 				<view style="display: flex;">
 					<text style="font-weight:bold;font-size: 20px;margin-left:25px">第</text>
 					<text style="color:#dc851f;font-weight:bold;font-size: 20px;margin-left:5px">{{page+1}}</text>
 					<text style="font-weight:bold;font-size: 20px;margin-left:5px">页</text>
 				</view>
-				<img src="/static/common/normal_u36.png" @click="addPage()" style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
-				<img :src="sSicon[sSFlag]" @click="sSradio()" style="width: 35px;height: 35px;box-sizing: border-box;margin-left:5px;">
+				<img src="/static/common/normal_u36.png" 
+					@click="addPage()" 
+					style="width: 30px;height: 30px;box-sizing: border-box;transform: rotate(90deg);margin-left:25px;">
+				<img 
+					:src="sSicon[sSFlag]" 
+					@click="sSradio()" 
+					style="width: 35px;height: 35px;box-sizing: border-box;margin-left:5px;">
 				<img src="/static/common/normal_u42.png" style="width: 31px;height: 31px;box-sizing: border-box;margin-left:5px;">
 			</view>
 			<view style="display: flex;margin-left:200px;">
@@ -46,6 +68,8 @@
 
 <script>
 import CdTabbar from '@/pages/tabbar/tabbar.vue';
+import {BASE_URL} from "@/config.js";
+
 export default {
 	name: 'App',
 	components: {
@@ -53,6 +77,7 @@ export default {
 	},
 	data() {
 		return {
+			BASE_URL,
 			comic_id: this.$route.query.comic_id,
 			title: "",
 			author: "",
@@ -68,7 +93,13 @@ export default {
 			switch_flag : false,
 			sSicon: ["/static/common/normal_u43.png", "/static/common/normal_u40.png"],
 			sSFlag: 0,
-			index: 0
+			index: 0,
+			// 好友邀请提示框
+			flag_count: 0,
+			type: 'center',
+			msgType: 'success',
+			messageText: '这是一条成功提示',
+			value: ''
 		};
 	},
 	
@@ -81,6 +112,13 @@ export default {
 			}
 			this.resetIndex()
 			this.image = this.data[this.page].pag_img
+			
+			// 当在最后一页时，5秒后启动对话框
+			if (this.page === this.data.length - 1){
+				setTimeout(() => {
+				            this.dialogToggle('success');
+				}, 5000);
+			}
 		},
 		async deletePage(){
 			if (this.page <= 0){
@@ -104,7 +142,8 @@ export default {
 		playNextAudio() {
 		    if (this.index < this.data[this.page].pag_radio.length) {
 		        // 播放当前音频
-		        this.audio = new Audio(this.data[this.page].pag_radio[this.index]);
+				console.log(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`)
+		        this.audio = new Audio(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
 		        
 		        // 监听音频播放完毕事件
 		        this.audio.addEventListener('ended', () => {
@@ -142,42 +181,76 @@ export default {
 			this.switch_flag = !this.switch_flag
 		},
 		async fetchBookData(){
-			// const response = await fetch('https://your-backend-api.com/login', {
-			// 	method: 'POST',
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	},
-			// 	body: JSON.stringify({
-			// 		comic_id: this.comic_id
-			// 	})
-			// });
-			// if (!response.ok) {
-			// 	throw new Error('Fetch data failed');
-			// }
-			const response = await fetch('/pages/common/bookContent.json');
+			console.log(this.comic_id)
+			const response = await fetch(`${BASE_URL}/story/fetchBookContent`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					comic_id: this.comic_id
+				})
+			});
 			if (!response.ok) {
-				throw new Error('Failed to fetch mock data');
+				throw new Error('Fetch data failed');
 			}
+			// const response = await fetch('/pages/common/bookContent.json');
+			// if (!response.ok) {
+			// 	throw new Error('Failed to fetch mock data');
+			// }
 			const data = await response.json();
-			this.title = data.title
-			this.author = data.author
-			this.age = data.age
-			this.gender = data.gender
-			this.recomm_age = data.recomm_age
-			this.if_like = data.if_like
-			this.data = data.data
+			console.log(data)
+			this.title = data.data.title
+			this.author = data.data.author_name
+			this.age = data.data.age
+			this.gender = data.data.gender
+			this.recomm_age = data.data.recomm_age
+			this.if_like = data.data.if_like
+			this.data = data.data.data
 			this.addPage()
+		},
+		// 提示框
+		dialogToggle(type) {
+			this.msgType = type
+			this.$refs.alertDialog.open()
+		},
+		dialogClose() {
+			console.log('点击关闭')
+		},
+		dialogConfirm() {
+			console.log('点击确认')
+			this.messageText = `点击确认了 ${this.msgType} 窗口`
+			this.$router.push({
+			    path: "../chat/chat",
+			    query: {
+			      comic_id: this.comic_id
+			    }
+			});
 		}
 	},
 	async mounted() {
 		await this.fetchBookData();
+		// setTimeout(() => {
+		//         this.dialogToggle('success'); 
+		
+		//         setInterval(() => {
+		//             this.dialogToggle('success');  
+		//         }, 10000);
+		
+		//     }, 30000);
 
 	}
 }
 </script>
 
 <style scoped>
-	
+.popup-success {
+	color: #fff;
+	background-color: #e1f3d8;
+}
+.success-text {
+	color: #09bb07;
+}
 .container {
 	  font-family: Arial, sans-serif;
 	  padding: 20px;

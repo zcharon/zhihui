@@ -30,34 +30,38 @@
 </template>
 
 <script>
+import {BASE_URL} from "@/config.js";
+
 export default {
   data() {
     return {
       account: '',
-      password: ''
+      password: '',
+	  user_id: 0
     };
   },
   methods: {
     async login() {
       try {
-  //       const response = await fetch('https://your-backend-api.com/login', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({
-  //           account: this.account,
-  //           password: this.password
-  //         })
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error('Login failed');
-  //       }
-
-  //       const data = await response.json();
-		// if (data.code == 200) {
-        if (true) {
+        const response = await fetch(`${BASE_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.account,
+            password: this.password
+          })
+        });
+        if (!response.ok) {
+          throw new Error('Login failed');
+        }
+        const data = await response.json();
+		this.user_id = data.data.user_id
+		localStorage.setItem("user_id", JSON.stringify(this.user_id));
+		console.log(data)
+		if (data.code == 200) {
+        // if (true) {
           // Handle successful login (e.g., store token, redirect)
           uni.navigateTo({
             url: '/pages/main/main'
