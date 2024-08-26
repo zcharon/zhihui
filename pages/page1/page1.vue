@@ -563,39 +563,39 @@ export default {
 			}
 		},
 		async startRecording() {
-		  this.recorder = new Recorder({
-		      sampleBits: 16,                 // 采样位数，支持 8 或 16，默认是16
-		      sampleRate: 16000,              // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
-		      numChannels: 1,                 // 声道，支持 1 或 2， 默认是1
-		      // compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
-		  });
-			Recorder.getPermission().then(() => {
-			  console.log('开始录音')
-			  this.recorder.start() // 开始录音
+			this.recorder = new Recorder({
+				sampleBits: 16,                 // 采样位数，支持 8 或 16，默认是16
+				sampleRate: 16000,              // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
+				numChannels: 1,                 // 声道，支持 1 或 2， 默认是1
+				// compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
+			});
+				Recorder.getPermission().then(() => {
+					console.log('开始录音')
+					this.recorder.start() // 开始录音
 			}, (error) => {
-			  this.$message({
-				message: '请先允许该网页使用麦克风',
-				type: 'info'
-			  })
-			  console.log(`${error.name} : ${error.message}`)
+				this.$message({
+					message: '请先允许该网页使用麦克风',
+					type: 'info'
+				})
+				console.log(`${error.name} : ${error.message}`)
 			})
 		},
 		async stopRecording() {
-		  try {
-			console.log('停止录音')
-			this.uploadAudio(); // 录音停止后立即上传
-			this.releaseResources(); // 释放麦克风资源
-		  } catch (error) {
-			console.error('停止录音失败:', error);
-		  }
+			try {
+				console.log('停止录音')
+				this.uploadAudio(); // 录音停止后立即上传
+				this.releaseResources(); // 释放麦克风资源
+			} catch (error) {
+				console.error('停止录音失败:', error);
+			}
 		},
 		async uploadAudio() {
-		  if (this.recorder == null || this.recorder.duration === 0) {
-			  this.$message({
-				message: '请先录音',
-				type: 'error'
-			  })
-			  return false
+			if (this.recorder == null || this.recorder.duration === 0) {
+				this.$message({
+					message: '请先录音',
+					type: 'error'
+				})
+				return false
 			}
 			this.recorder.stop() // 暂停录音
 			this.timer = null
@@ -607,27 +607,26 @@ export default {
 			const newbolb = new Blob([blob], { type: 'audio/wav' })
 			// const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
 			formData.append('audio', newbolb, 'recording.wav')
-		  
-			  const response = await fetch(`${BASE_URL}/story/audio2text`, {
-				  method: 'POST',
-				  body: formData,
-			  })
-			  if (!response.ok) {
-			  	throw new Error('upload audio failed');
-			  }
-			  const response_data = await response.json();
-			  console.log("audio2text", response_data)
-			  this.user_input = response_data.data.text
+			const response = await fetch(`${BASE_URL}/story/audio2text`, {
+				method: 'POST',
+				body: formData,
+			})
+			if (!response.ok) {
+				throw new Error('upload audio failed');
+			}
+			const response_data = await response.json();
+			console.log("audio2text", response_data)
+			this.user_input = response_data.data.text
 		},
 		releaseResources() {
-		  // 释放麦克风资源的实现
-		  if (this.recorder) {
-		      // 如果录音仍在进行中，则停止录音
-		        this.recorder.stop();
-				this.recorder.destroy();
+			// 释放麦克风资源的实现
+			if (this.recorder) {
+				// 如果录音仍在进行中，则停止录音
+					this.recorder.stop();
+					this.recorder.destroy();
 			}
-		      // 清理录音实例
-		      this.recorder = null;
+				// 清理录音实例
+				this.recorder = null;
 		},
 		beforeDestroy() {
 		    this.stopRecording();
