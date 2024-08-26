@@ -134,13 +134,22 @@
 		        <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; margin-left: 10px;">
 		      </span>
 		    </div>
-		<view v-if="create_flag" class="element4" 
+		<!-- <view v-if="create_flag" class="element4" 
 		      style="z-index: 5;position:absolute; top: 662px;left: 532px;"
 		      @click="format_story_cotent.length > 0 ? create_switch() : null">
 		    <text style="box-sizing: border-box;align-items: center;justify-content: center;font-size: 20px;font-weight: bold;position:absolute; top: 22px;left: 25px;">
 		        生 成
 		    </text>
+		</view> -->
+		<view 
+		  class="element4" 
+		  :style="create_flag ? { zIndex: 5, position: 'absolute', top: '662px', left: '532px' } : { backgroundColor: 'grey', zIndex: 5, position: 'absolute', top: '662px', left: '532px' }"
+		  @click="format_story_cotent.length > 0 && create_flag ? create_switch() : null">
+		  <text style="box-sizing: border-box; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; position: absolute; top: 22px; left: 25px;">
+		    生 成
+		  </text>
 		</view>
+
 	</div>
   </div>
 </template>
@@ -148,7 +157,7 @@
 <script>
 import CdTabbar from '@/pages/tabbar/tabbar.vue';
 import {BASE_URL} from "@/config.js";
-
+import Recorder from 'js-audio-recorder'
 export default {
 	name: 'DrawingPlatform',
 	components: {
@@ -186,6 +195,7 @@ export default {
 			create_flag: false,
 			switch_flag: false,
 			sSicon: ["/static/common/normal_u43.png", "/static/common/normal_u40.png"],
+			audio_flag: false,
 			// 聊天页面
 			chatMsg: '',
 			msgList: [
@@ -195,6 +205,12 @@ export default {
 			windowHeight: 0,
 			inputHeight: 100,
 			inputPlaceholder: '快来聊天吧~',
+			// 录音
+			audioBlob: null,
+			isRecording: false,
+			recorder: null,
+			stream: null,
+			placeholder_text: ""
 		};
 	},
 	methods: {
@@ -402,35 +418,49 @@ export default {
 			}
 			this.scrollToBottom()
 		},
-		async create_audio(text){
-			try {
-				console.log(text)
-				this.isLoading = true
-				const response = await fetch(`${BASE_URL}/story/text2audio`, {
-					method: 'POST',
-					headers: {
-					'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						"text": text
-					})
-				});
-				this.isLoading = false
-				if (!response.ok) {
-					throw new Error('Speech input failed');
-				}
-				
-				const data = await response.json();
-				console.log(data.data)
-				var audio_path = data.data.audiopath
-				var audio = new Audio(`${BASE_URL}${audio_path}`);
-				audio.play().catch(error => {
-				    alert('An error occurred while playing the audio');
-				});
-			} catch (error) {
-				console.error('Error:', error);
-				alert('An error occurred while processing the speech input');
-			}
+		async create_audio(text) {
+		    if (this.audio_flag) {
+		        return "";
+		    }
+		    this.audio_flag = true;
+		    try {
+		        console.log(text);
+		        this.isLoading = true;
+		        const response = await fetch(`${BASE_URL}/story/text2audio`, {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({
+		                "text": text
+		            })
+		        });
+		        this.isLoading = false;
+		        if (!response.ok) {
+		            throw new Error('Speech input failed');
+		        }
+		
+		        const data = await response.json();
+		        console.log(data.data);
+		        var audio_path = data.data.audiopath;
+		        var audio = new Audio(`${BASE_URL}${audio_path}`);
+		        
+		        // 监听音频播放完成事件
+		        audio.addEventListener('ended', () => {
+		            this.audio_flag = false;
+		        });
+		
+		        // 播放音频
+		        audio.play().catch(error => {
+		            alert('An error occurred while playing the audio');
+		            this.audio_flag = false;
+		        });
+		        
+		    } catch (error) {
+		        console.error('Error:', error);
+		        alert('An error occurred while processing the speech input');
+		        this.audio_flag = false;
+		    }
 		},
 		async inputSpeech() {
 			try {
@@ -486,21 +516,27 @@ export default {
 		playNextAudio() {
 		    if (this.index < this.data[this.page].pag_radio.length) {
 		        // 播放当前音频
-		        this.audio = new Audio(`${this.BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
-		        
+		        // console.log(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
+		        this.audio = new Audio(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
+		
 		        // 监听音频播放完毕事件
 		        this.audio.addEventListener('ended', () => {
 		            this.index++;
 		            if (this.index < this.data[this.page].pag_radio.length) {
 		                this.content = this.data[this.page].pag_con[this.index];
 		                this.playNextAudio(); // 播放下一个音频
+		            } else if (this.page < this.data.length - 1) {
+		                // 当前页的音频播放完毕且还有下一页，跳到下一页并播放
+		                this.page++;
+		                this.index = 0;
+		                this.content = this.data[this.page].pag_con[this.index];
+		                this.playNextAudio();
 		            } else {
-		                // 所有音频播放完毕后，设置 sSFlag 为 0 并保持 index 在最后一个
+		                // 所有页的音频播放完毕，设置 sSFlag 为 0
 		                this.sSFlag = 0;
 		                this.index = this.data[this.page].pag_radio.length - 1; // 保持在最后一个音频的索引
 		            }
 		        });
-		        
 		        this.audio.play();
 		    } else {
 		        // 如果没有音频可以播放，直接设置 sSFlag 为 0 并保持 index 在最后一个
@@ -509,16 +545,16 @@ export default {
 		    }
 		},
 		async resetIndex() {
+			if (this.audio) {
+			    this.audio.pause();  // 暂停音频
+			    this.audio.currentTime = 0;  // 重置播放时间
+			}
 		    this.index = 0;  // 归零 index
 			this.content = this.data[this.page].pag_con[this.index]; 
 		    this.sSFlag = 0;  // 重置播放状态
-		    if (this.audio) {
-		        this.audio.pause();  // 暂停音频
-		        this.audio.currentTime = 0;  // 重置播放时间
-		    }
 		},
 		async audioRecord(){
-			if(this.radio_record == false){
+			if(this.radio_record === false){
 				this.startRecording()
 				this.radio_record = true
 			}else{
@@ -526,50 +562,72 @@ export default {
 				this.radio_record = false
 			}
 		},
-		startRecording() {
-		    navigator.mediaDevices.getUserMedia({ audio: true })
-		    .then(stream => {
-		        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-		        this.mediaRecorder = new MediaRecorder(stream);
-		        this.audioChunks = [];
-		
-		        this.mediaRecorder.ondataavailable = event => {
-		            this.audioChunks.push(event.data);
-		        };
-		
-		        this.mediaRecorder.start();
-		    })
-		    .catch(error => {
-		        console.error('无法获取麦克风权限:', error);
-		    });
+		async startRecording() {
+		  this.recorder = new Recorder({
+		      sampleBits: 16,                 // 采样位数，支持 8 或 16，默认是16
+		      sampleRate: 16000,              // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
+		      numChannels: 1,                 // 声道，支持 1 或 2， 默认是1
+		      // compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
+		  });
+			Recorder.getPermission().then(() => {
+			  console.log('开始录音')
+			  this.recorder.start() // 开始录音
+			}, (error) => {
+			  this.$message({
+				message: '请先允许该网页使用麦克风',
+				type: 'info'
+			  })
+			  console.log(`${error.name} : ${error.message}`)
+			})
 		},
-		stopRecording() {
-		    if (this.mediaRecorder) {
-		        this.mediaRecorder.stop();
-		        this.mediaRecorder.onstop = () => {
-					const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
-					this.sendAudioToServer(audioBlob);
-		        };
-		      }
-		    if (this.audioContext) {
-				this.audioContext.close();
-		    }
+		async stopRecording() {
+		  try {
+			console.log('停止录音')
+			this.uploadAudio(); // 录音停止后立即上传
+			this.releaseResources(); // 释放麦克风资源
+		  } catch (error) {
+			console.error('停止录音失败:', error);
+		  }
 		},
-		sendAudioToServer(audioBlob) {
-		    const formData = new FormData();
-		    formData.append('audio', audioBlob, 'recording.wav');
-		
-		    fetch('YOUR_BACKEND_URL', {
-		        method: 'POST',
-		        body: formData,
-		    })
-		    .then(response => response.json())
-		    .then(data => {
-		        console.log('服务器返回的数据:', data);
-		    })
-		    .catch(error => {
-		        console.error('发送音频到服务器失败:', error);
-		    });
+		async uploadAudio() {
+		  if (this.recorder == null || this.recorder.duration === 0) {
+			  this.$message({
+				message: '请先录音',
+				type: 'error'
+			  })
+			  return false
+			}
+			this.recorder.stop() // 暂停录音
+			this.timer = null
+			console.log('上传录音')// 上传录音
+	  
+			var formData = new FormData()
+			const blob = this.recorder.getWAVBlob()// 获取wav格式音频数据
+			// 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
+			const newbolb = new Blob([blob], { type: 'audio/wav' })
+			// const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
+			formData.append('audio', newbolb, 'recording.wav')
+		  
+			  const response = await fetch(`${BASE_URL}/story/audio2text`, {
+				  method: 'POST',
+				  body: formData,
+			  })
+			  if (!response.ok) {
+			  	throw new Error('upload audio failed');
+			  }
+			  const response_data = await response.json();
+			  console.log("audio2text", response_data)
+			  this.user_input = response_data.data.text
+		},
+		releaseResources() {
+		  // 释放麦克风资源的实现
+		  if (this.recorder) {
+		      // 如果录音仍在进行中，则停止录音
+		        this.recorder.stop();
+				this.recorder.destroy();
+			}
+		      // 清理录音实例
+		      this.recorder = null;
 		},
 		beforeDestroy() {
 		    this.stopRecording();

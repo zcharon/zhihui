@@ -142,22 +142,27 @@ export default {
 		playNextAudio() {
 		    if (this.index < this.data[this.page].pag_radio.length) {
 		        // 播放当前音频
-				console.log(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`)
+		        // console.log(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
 		        this.audio = new Audio(`${BASE_URL}${this.data[this.page].pag_radio[this.index]}`);
-		        
+		
 		        // 监听音频播放完毕事件
 		        this.audio.addEventListener('ended', () => {
 		            this.index++;
 		            if (this.index < this.data[this.page].pag_radio.length) {
 		                this.content = this.data[this.page].pag_con[this.index];
 		                this.playNextAudio(); // 播放下一个音频
+		            } else if (this.page < this.data.length - 1) {
+		                // 当前页的音频播放完毕且还有下一页，跳到下一页并播放
+		                this.page++;
+		                this.index = 0;
+		                this.content = this.data[this.page].pag_con[this.index];
+		                this.playNextAudio();
 		            } else {
-		                // 所有音频播放完毕后，设置 sSFlag 为 0 并保持 index 在最后一个
+		                // 所有页的音频播放完毕，设置 sSFlag 为 0
 		                this.sSFlag = 0;
 		                this.index = this.data[this.page].pag_radio.length - 1; // 保持在最后一个音频的索引
 		            }
 		        });
-		        
 		        this.audio.play();
 		    } else {
 		        // 如果没有音频可以播放，直接设置 sSFlag 为 0 并保持 index 在最后一个
@@ -166,13 +171,14 @@ export default {
 		    }
 		},
 		resetIndex() {
-		    this.index = 0;  // 归零 index
-			this.content = this.data[this.page].pag_con[this.index]; 
-		    this.sSFlag = 0;  // 重置播放状态
 		    if (this.audio) {
 		        this.audio.pause();  // 暂停音频
 		        this.audio.currentTime = 0;  // 重置播放时间
 		    }
+			this.index = 0;  // 归零 index
+			this.content = this.data[this.page].pag_con[this.index]; 
+			this.sSFlag = 0;  // 重置播放状态
+			// console.log(this.index)
 		},
 		favClick(){
 			this.if_like = !this.if_like

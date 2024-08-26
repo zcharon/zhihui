@@ -1,8 +1,25 @@
 {
-  "hash": "916c50ee",
-  "configHash": "7ea1ff26",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "6ab67826",
-  "optimized": {},
-  "chunks": {}
+  "hash": "c5462ede",
+  "configHash": "2500f616",
+  "lockfileHash": "2c955375",
+  "browserHash": "c5793ba5",
+  "optimized": {
+    "recorder-core": {
+      "src": "../../../../../node_modules/recorder-core/src/recorder-core.js",
+      "file": "recorder-core.js",
+      "fileHash": "5d97dc2c",
+      "needsInterop": true
+    },
+    "js-audio-recorder": {
+      "src": "../../../../../node_modules/js-audio-recorder/index.js",
+      "file": "js-audio-recorder.js",
+      "fileHash": "ce1f0265",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-Y2F7D3TJ": {
+      "file": "chunk-Y2F7D3TJ.js"
+    }
+  }
 }

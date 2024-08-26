@@ -57,6 +57,7 @@ export default {
           throw new Error('Login failed');
         }
         const data = await response.json();
+		console.log(data)
 		this.user_id = data.data.user_id
 		localStorage.setItem("user_id", JSON.stringify(this.user_id));
 		console.log(data)
