@@ -1,10 +1,11 @@
-import {
-  __commonJS
-} from "./chunk-Y2F7D3TJ.js";
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
 
-// ../../../Projects/JavaProjects/zhihui/node_modules/js-audio-recorder/dist/recorder.js
+// E:/JavaProjects/zhihui/node_modules/js-audio-recorder/dist/recorder.js
 var require_recorder = __commonJS({
-  "../../../Projects/JavaProjects/zhihui/node_modules/js-audio-recorder/dist/recorder.js"(exports, module) {
+  "E:/JavaProjects/zhihui/node_modules/js-audio-recorder/dist/recorder.js"(exports, module) {
     !function(t, e) {
       "object" == typeof exports && "object" == typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define([], e) : "object" == typeof exports ? exports.Recorder = e() : t.Recorder = e();
     }(exports, function() {
@@ -308,9 +309,9 @@ var require_recorder = __commonJS({
   }
 });
 
-// ../../../Projects/JavaProjects/zhihui/node_modules/js-audio-recorder/index.js
+// E:/JavaProjects/zhihui/node_modules/js-audio-recorder/index.js
 var require_js_audio_recorder = __commonJS({
-  "../../../Projects/JavaProjects/zhihui/node_modules/js-audio-recorder/index.js"(exports, module) {
+  "E:/JavaProjects/zhihui/node_modules/js-audio-recorder/index.js"(exports, module) {
     module.exports = require_recorder();
   }
 });

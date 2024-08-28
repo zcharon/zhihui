@@ -61,7 +61,7 @@
 				style="width: 22px;height: 22px;box-sizing: border-box;margin-left: 10px;">
 			</view>
 			<view v-if="image !== ''" >
-				<img :src="`${BASE_URL}${image}`" style="width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: -290px;">
+				<img :src="`${BASE_URL}${data[page].pag_img}?t=${new Date().getTime()}`" style="width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: -290px;">
 			</view>
 			<view class="element3" style="margin-left: 20px;">
 				<text style="box-sizing: border-box;text-align: center;line-height: center;">{{content}}</text>
@@ -374,6 +374,7 @@ export default {
 				// 	throw new Error('Failed to fetch mock data');
 				// }
 				// var data = reaponse_data.data
+				console.log(data)
 				this.story_messages = data.data.story_messages
 				this.script_messages = data.data.script_messages
 				this.format_script_content = data.data.format_script_content
@@ -493,6 +494,7 @@ export default {
 			}
 			this.resetIndex()
 			this.image = this.data[this.page].pag_img
+			console.log(this.data[this.page].pag_img)
 		},
 		async deletePage(){
 			if (this.page <= 0){
@@ -502,6 +504,7 @@ export default {
 			}
 			this.resetIndex()
 			this.image = this.data[this.page].pag_img
+			console.log(this.data[this.page].pag_img)
 		},
 		sSradio() {
 		    if (this.sSFlag == 0) {
@@ -573,10 +576,6 @@ export default {
 					console.log('开始录音')
 					this.recorder.start() // 开始录音
 			}, (error) => {
-				this.$message({
-					message: '请先允许该网页使用麦克风',
-					type: 'info'
-				})
 				console.log(`${error.name} : ${error.message}`)
 			})
 		},
