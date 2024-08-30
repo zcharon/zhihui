@@ -65,7 +65,7 @@ export default {
         // if (true) {
           // Handle successful login (e.g., store token, redirect)
           uni.navigateTo({
-            url: '/pages/main/main'
+            url: '/pages/mainpage/mainpage'
           });
         } else {
           // Handle login error

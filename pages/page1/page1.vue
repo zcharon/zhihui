@@ -4,14 +4,24 @@
 		<view class="left-panel" >
 			<cd-tabbar></cd-tabbar>
 		</view>
-		<view>
-			<view>
-				<img src="/static/page1/normal_u3.svg" class="left-arrow"/>
-				<img src="/static/page1/u17.png" class="left-icon"/>
+		<view style="display: flex;">
+			
+			 <view class="left-arrow-button" style="margin-top:3.5vh;margin-left:20vh;display: flex;">
+							<img src="/static/page1/u17.png" class="left-icon" style="margin-left:5px;margin-top:5px;"/>
+							<text class="xuanzehuafeng" style="margin-left:10px;margin-top:12px;">
+								选 择 画 风
+							</text>
 			</view>
-			<view>
-				<img src="/static/page1/normal_u1.svg" class="right-arrow"/>
-				<img src="/static/page1/u16.png" class="right-icon"/>
+			<view class="right-arrow-button" style="margin-top:3.5vh;margin-left:4vh;display: flex;">
+							<img src="/static/page1/u16.png" class="right-icon" style="margin-left:5px;margin-top:5px;"/>
+							<text class="zhizuohuiben" style="margin-left:10px;margin-top:12px;">
+								制 作 绘 本
+							</text>
+			</view>
+			<view class="baocun" style="margin-top:3.5vh;margin-left:4vh;display: flex;">
+							<text class="baocun-text" style="margin-top:12px;">
+								保 存
+							</text>
 			</view>
 		</view>
 		<view class="left-page" style="position:absolute; top: 169px;left: 164px;">
@@ -805,7 +815,7 @@ export default {
   border-radius: 5px;
 }
 .left-arrow{
-	width: 548px;
+	width: 448px;
 	height: 56px;
 	padding: 2px 2px 2px 2px;
 /* 	border-radius: 12px;
@@ -822,18 +832,12 @@ export default {
 .left-icon{
 	width:  38px;
 	height: 38px;
-	position: absolute; /* 使用绝对定位 */
-	top: 109px; /* 距离顶部 100px */
-	left: 182px; /* 距离左边 50px */
 	z-index: 2;
 }
 
 .right-icon{
 	width:  40px;
 	height: 40px;
-	position: absolute; /* 使用绝对定位 */
-	top: 109px; /* 距离顶部 100px */
-	left: 738px; /* 距离左边 50px */
 	z-index: 2;
 }
 
@@ -984,21 +988,14 @@ export default {
 	text-align: center;
 }
 
-/* .chat-content {
-	flex: 1;
-	overflow-y: auto;
-	background-color: rgba(255, 242, 202, 0.22);
-	padding: 20rpx;
-} */
-
 .chat-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden; 
   background-color: rgba(255, 242, 202, 0.22);
   height: calc(100% - 60px); /* 留出空间给底部的输入框 */
-  overflow-y: hidden; 
 }
+
 
 .msg-list {
 	display: flex;
@@ -1013,40 +1010,32 @@ export default {
 .user-message .bubble {
 	align-self: flex-end;
 	background-color: #fce6d5;
+	margin-left:100px;
 }
 
 .bubble {
-	padding: 20rpx;
-	border-radius: 10rpx;
-	max-width: 75%;
-	word-wrap: break-word;
-	position: relative;
-	margin-bottom: 20rpx;
-	font-size: 30rpx;
-	line-height: 40rpx;
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 10px;
+  position: relative;
 }
 
-.bubble.left::after {
-	content: '';
-	position: absolute;
-	left: -12rpx;
-	top: 10rpx;
-	width: 0;
-	height: 0;
-	border: 12rpx solid transparent;
-	border-right-color: #fff;
+.left-bubble {
+  background-color: #f0f0f0;
+  align-self: flex-start;
 }
 
-.bubble.right::after {
-	content: '';
-	position: absolute;
-	right: -12rpx;
-	top: 10rpx;
-	width: 0;
-	height: 0;
-	border: 12rpx solid transparent;
-	border-left-color: #c2dcff;
+.right-bubble {
+		position: absolute;
+		display: inline-block;
+		width: 0;
+		height: 0;
+		left: 100%;
+		top: 10px;
+		border: 12rpx solid transparent;
 }
+
 
 .chat-input {
 	background-color: #f4f5f7;
@@ -1116,5 +1105,71 @@ textarea {
 	height: 19px;
 	box-sizing: border-box;
 }
+
+.left-arrow-button {
+  width: 448px;
+  height: 56px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 12px;
+  border: 2px solid #ffb74d;
+  background-color: #ffb74d;
+  box-sizing: border-box;
+}
+
+.xuanzehuafeng {
+  width: 84px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+  text-align: left;
+  line-height: normal;
+}
+
+.right-arrow-button {
+  width: 448px;
+  height: 56px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 12px;
+  border: 2px solid #ffb74d;
+  background-color: rgba(255, 183, 77, 0);
+  box-sizing: border-box;
+}
+
+.zhizuohuiben {
+  width: 84px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: #dc851f;
+  text-align: left;
+  line-height: normal;
+}
+
+.baocun {
+  width: 88px;
+  height: 56px;
+  padding: 2px 2px 2px 2px;
+  border-radius: 12px;
+  border: 2px solid #dc851f;
+  background-color: #dc851f;
+  box-sizing: border-box;
+}
+.baocun-text{
+  width: 84px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+  font-family: "Arial Bold", "Arial Normal", "Arial", sans-serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  line-height: normal;
+}
+
 </style>
 

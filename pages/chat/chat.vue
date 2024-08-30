@@ -3,9 +3,6 @@
     <view class="left-panel">
     	<cd-tabbar></cd-tabbar>
     </view>
-	<view>
-		<img src="/static/chat/normal_u56.png" style="width: 51px;height: 51px;box-sizing: border-box;position:absolute; top: 100px;left: 170px">
-	</view>
 	<view class="content">
 		<view class="left-page">
 			<view style="margin-bottom:10px;margin-left:25px;display: flex;">
@@ -65,7 +62,7 @@
 				      
 				      <view class="ai-message" v-if="item.type === 'bot'">
 						<view style="display: flex;">
-							<img src="/static/chat/normal_u12.png" class="avatar left-avatar" style="width: 43px;height: 52px;box-sizing: border-box;"/>
+							<img src="/static/chat/normal_u48.png" class="avatar left-avatar" style="width: 53px;height: 55px;box-sizing: border-box;"/>
 							<view class="bubble left" >{{ item.content }}
 							<image v-if="item.image" :src="item.image" class="message-image" @click="create_audio(item.content)"/>
 							</view>
@@ -74,7 +71,6 @@
 				      
 				      <view class="user-message" v-if="item.type === 'user'">
 						<view style="display: flex;">
-							<img src="/static/chat/normal_u48.png" class="avatar right-avatar" style="width: 53px;height: 55px;box-sizing: border-box;"/>
 							<view class="bubble right" >{{ item.content }}
 							<image v-if="item.image" :src="item.image" class="message-image" @click="create_audio(item.content)" />
 							</view>
@@ -135,8 +131,8 @@ export default {
 			chatMsg: '',
 			user_input: "",
 			msgList: [
-				{ type: 'user', content: '这个绘本可真好看！',image:"/static/chat/normal_u45.png" },
-				{ type: 'user', content: '很高兴你能接受我的邀请！',image:"/static/chat/normal_u45.png" },
+				{ type: 'bot', content: '这个绘本可真好看！',image:"/static/chat/normal_u45.png" },
+				{ type: 'bot', content: '很高兴你能接受我的邀请！',image:"/static/chat/normal_u45.png" },
 			],
 			history_prompts:[
 				{ "content": "你好", "role": "user"},
@@ -689,20 +685,12 @@ export default {
 	text-align: center;
 }
 
-/* .chat-content {
-	flex: 1;
-	overflow-y: auto;
-	background-color: rgba(255, 242, 202, 0.22);
-	padding: 20rpx;
-} */
-
 .chat-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden; 
   background-color: rgba(255, 242, 202, 0.22);
   height: calc(100% - 60px); /* 留出空间给底部的输入框 */
-  overflow-y: hidden; 
 }
 
 .msg-list {
@@ -718,39 +706,30 @@ export default {
 .user-message .bubble {
 	align-self: flex-end;
 	background-color: #fce6d5;
+	margin-left:150px;
 }
 
 .bubble {
-	padding: 20rpx;
-	border-radius: 10rpx;
-	max-width: 75%;
-	word-wrap: break-word;
-	position: relative;
-	margin-bottom: 20rpx;
-	font-size: 30rpx;
-	line-height: 40rpx;
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 10px;
+  position: relative;
 }
 
-.bubble.left::after {
-	content: '';
-	position: absolute;
-	left: -12rpx;
-	top: 10rpx;
-	width: 0;
-	height: 0;
-	border: 12rpx solid transparent;
-	border-right-color: #fff;
+.left-bubble {
+  background-color: #f0f0f0;
+  align-self: flex-start;
 }
 
-.bubble.right::after {
-	content: '';
-	position: absolute;
-	right: -12rpx;
-	top: 10rpx;
-	width: 0;
-	height: 0;
-	border: 12rpx solid transparent;
-	border-left-color: #c2dcff;
+.right-bubble {
+		position: absolute;
+		display: inline-block;
+		width: 0;
+		height: 0;
+		left: 100%;
+		top: 10px;
+		border: 12rpx solid transparent;
 }
 
 .chat-input {
