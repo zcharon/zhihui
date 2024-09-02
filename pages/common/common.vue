@@ -10,12 +10,12 @@
 		</button>
 	</view> -->
 	<uni-popup ref="alertDialog" type="dialog">
-		<uni-popup-dialog :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="用户xxx邀请您进入聊天室" @confirm="dialogConfirm"
+		<uni-popup-dialog :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="用户清风~邀请您进入聊天室" @confirm="dialogConfirm"
 			@close="dialogClose">
 		</uni-popup-dialog>
 	</uni-popup>
 	<view class="content">
-		  <view style="margin-top:20px;margin-bottom:20px;margin-left:30px;display: flex;">
+		  <view style="margin-top:35px;margin-bottom:20px;margin-left:30px;display: flex;">
 				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 22px;">{{title}}</text>
 				<text style="color:rgba(169, 102, 24, 0.75);font-size: 24px;margin-left: 18px;">{{author}}（{{age}}岁）</text>
 				<view style="margin-left: 450px;display: flex;">
@@ -30,10 +30,10 @@
 		  </view>
 		  <img 
 			:src="`${BASE_URL}${image}`" 
-			alt="Beautiful Tree" style="width: 1102px;height: 551px;box-sizing: border-box;"/>
+			alt="Beautiful Tree" style="width: 930px;height: 465px;box-sizing: border-box;"/>
 		  <text style="margin-top:20px; text-align: center;line-height: center;">{{content}}</text>
-		  <view style="margin-top:30px;display: flex;">
-			<view style="margin-left:380px;display: flex;">
+		  <view style="margin-top:50px;display: flex;">
+			<view style="margin-left:260px;display: flex;">
 				<img src="/static/common/normal_u41.png"  
 					@click="resetIndex()" 
 					style="width: 35px;height: 35px;box-sizing: border-box;">
@@ -59,7 +59,10 @@
 			  	<switch @change="handleSwitchChange" color="#FFCC33" />
 			</view>
 			<view>
-				<img v-show="switch_flag" src="/static/common/normal_u58.png" style="width: 34px;height: 34px;box-sizing: border-box;position:absolute; top: 500px;left: 200px;">
+				<img v-show="switch_flag" @click="viewCao()" src="/static/common/normal_u58.png" style="width: 34px;height: 34px;box-sizing: border-box;position:absolute; top: 500px;left: 200px;">
+			</view>
+			<view>
+				<img v-show="view_flag" src="/static/common/cao.png" style="width: 146px;height: 83px;box-sizing: border-box;position:absolute; top: 400px;left: 220px;">
 			</view>
 		  </view>
 	</view>
@@ -94,6 +97,7 @@ export default {
 			sSicon: ["/static/common/normal_u43.png", "/static/common/normal_u40.png"],
 			sSFlag: 0,
 			index: 0,
+			view_flag: false,
 			// 好友邀请提示框
 			flag_count: 0,
 			type: 'center',
@@ -186,6 +190,9 @@ export default {
 		handleSwitchChange(){
 			this.switch_flag = !this.switch_flag
 		},
+		viewCao(){
+			this.view_flag = !this.view_flag
+		},
 		async fetchBookData(){
 			console.log(this.comic_id)
 			const response = await fetch(`${BASE_URL}/story/fetchBookContent`, {
@@ -210,7 +217,7 @@ export default {
 			this.author = data.data.author_name
 			this.age = data.data.age
 			this.gender = data.data.gender
-			this.recomm_age = data.data.recomm_age
+			this.recomm_age = data.data.recom_age
 			this.if_like = data.data.if_like
 			this.data = data.data.data
 			this.addPage()
@@ -224,7 +231,7 @@ export default {
 			console.log('点击关闭')
 		},
 		dialogConfirm() {
-			console.log('点击确认')
+			console.log('点击确认', this.comic_id)
 			this.messageText = `点击确认了 ${this.msgType} 窗口`
 			this.$router.push({
 			    path: "../chat/chat",
@@ -258,8 +265,15 @@ export default {
 	color: #09bb07;
 }
 .container {
-	  font-family: Arial, sans-serif;
-	  padding: 20px;
+	  display: flex;
+	  flex: 1;
+	  position: fixed; 
+	  top: 5%; 
+	  left: 0; 
+	  right: 0; 
+	  bottom: 0; 
+	  overflow-y: hidden; 
+	  overflow-x: hidden; 
 }
 .app {
   font-family: 'Arial', sans-serif;
@@ -306,8 +320,7 @@ export default {
   display: flex;
  flex-direction: column;
 /*  align-items: center; */
- padding: 80px;
- width: 1172px;
+ width: 980px;
  height: 813px;
  padding: 2px 2px 2px 2px;
  border-radius: 5px;
@@ -315,8 +328,8 @@ export default {
  background-color: #f6f1ed;
  box-sizing: border-box;
  position: absolute; 
- top: 155px; 
- left: 174px;
+ top: 5px; 
+ left: 124px;
 }
 
 .main-image {

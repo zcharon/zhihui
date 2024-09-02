@@ -8,7 +8,7 @@
 			<view style="margin-bottom:10px;margin-left:25px;display: flex;">
 				<text style="color:rgba(169, 102, 24, 0.75);font-weight:bold;font-size: 22px;">{{title}}</text>
 				<text style="color:rgba(169, 102, 24, 0.75);font-size: 24px;margin-left: 18px;">{{author}}（{{age}}岁）</text>
-				<view style="margin-left: 200px;display: flex;">
+				<view style="margin-left: 150px;display: flex;">
 					<text class="tag" style="background-color: rgba(242, 176, 176, 1);font-size: 16px;">{{gender}}生</text>
 					<text class="tag" style="background-color: rgba(252, 198, 159, 1);font-size: 16px;">{{recomm_age}}岁</text>
 				</view>
@@ -16,13 +16,13 @@
 			<view>
 				<img 
 					:src="`${BASE_URL}${image}`" 
-					alt="Beautiful Tree" style="width: 682px;height: 341px;box-sizing: border-box;"/>
+					alt="Beautiful Tree" style="width: 582px;height: 291px;box-sizing: border-box;"/>
 			</view>
 			<view style="margin-top: 10px;">
 				<text style="margin-top:20px;box-sizing: border-box;position: absolute;border-radius: 50%;text-align: center;line-height: center;">{{content}}</text>
 			</view>
 			<view style="margin-top:100px;display: flex;">
-				<view style="margin-left:200px;display: flex;">
+				<view style="margin-left:150px;display: flex;">
 					<img src="/static/common/normal_u41.png" 
 						@click="resetIndex()" 
 						style="width: 35px;height: 35px;box-sizing: border-box;">
@@ -48,13 +48,13 @@
 					</view> -->
 				</view>
 			</view>
-			<view class="rectangle2" style="margin-top: 10px;">
+			<view class="rectangle2" style="margin-top: 30px;">
 				<img src="/static/chat/normal_u12.png" style="width: 106px;height: 130px;box-sizing: border-box;margin-left:50px;margin-top: 20px;">
 				<img src="/static/chat/normal_u48.png" style="width: 141px;height: 145px;box-sizing: border-box;margin-left:30px;margin-top: 20px;">
 				<img src="/static/chat/normal_u54.svg" style="width: 73px;height: 73px;box-sizing: border-box;margin-left:30px;margin-top: 10px;">
 			</view>
 		</view>
-		<view class="right-page" style="position:absolute; top: 30px;left: 723px;">
+		<view class="right-page" style="position:absolute; top: 30px;left: 603px;">
 				<scroll-view class="chat-content" scroll-y="false" :scroll-top="scrollTop">
 				  
 				  <view class="msg-list">
@@ -82,14 +82,14 @@
 				</scroll-view>
 				
 				<view>
-					<view class="text-field" style="position: absolute; top: 740px; left: 25px;">
+					<view class="text-field" style="position: absolute; top: 620px; left: 15px;">
 					  <input  type="text"  v-model="user_input" @keypress.enter="inputInput" placeholder="" 
 						style="width: 200px; height: 30px;"/>
 					</view>
 					<view @click="audioRecord">
 					  <img 
 						src="/static/chat/normal_u46.png" 
-						style="width: 93px; height: 93px; box-sizing: border-box; position: absolute; top: 685px; left: 285px;" />
+						style="width: 83px; height: 83px; box-sizing: border-box; position: absolute; top: 575px; left: 275px;" />
 					</view>
 				</view>
 			</view>			      
@@ -162,7 +162,7 @@ export default {
 			    this.history_prompts.push({"content": this.input_, "role": "user"})
 			}
 			if (this.input_.trim() !== '') {
-				this.msgList.push({ type: 'bot', content: this.input_})
+				this.msgList.push({ type: 'user', content: this.input_})
 				this.scrollToBottom()
 			} else {
 				uni.showToast({ title: '不能发送空白消息', icon: 'none' })
@@ -182,7 +182,7 @@ export default {
 					throw new Error('Input content failed');
 				}
 				const data = await response.json();
-				this.msgList.push({ type: 'user', content:data.data.output, image:"/static/chat/normal_u45.png" })
+				this.msgList.push({ type: 'bot', content:data.data.output, image:"/static/chat/normal_u45.png" })
 				this.history_prompts = data.data.history_prompts
 			} catch (error) {
 				console.error('Error:', error);
@@ -294,8 +294,8 @@ export default {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					// comic_id: this.comic_id
-					comic_id: 1723727775
+					comic_id: this.comic_id
+					// comic_id: 1723727775
 				})
 			});
 			if (!response.ok) {
@@ -311,7 +311,7 @@ export default {
 			this.author = data.data.author_name
 			this.age = data.data.age
 			this.gender = data.data.gender
-			this.recomm_age = data.data.recomm_age
+			this.recomm_age = data.data.recom_age
 			this.if_like = data.data.if_like
 			this.data = data.data.data
 			this.addPage()
@@ -437,8 +437,15 @@ export default {
 <style scoped>
 	
 .container {
-	  font-family: Arial, sans-serif;
-	  padding: 20px;
+	  display: flex;
+	  flex: 1;
+	  position: fixed; 
+	  top: 5%; 
+	  left: 0; 
+	  right: 0; 
+	  bottom: 0; 
+	  overflow-y: hidden; 
+	  overflow-x: hidden; 
 }
 .app {
   font-family: 'Arial', sans-serif;
@@ -485,7 +492,7 @@ export default {
   display: flex;
  flex-direction: column;
 /*  align-items: center; */
- padding: 80px;
+
  width: 1172px;
  height: 813px;
  padding: 2px 2px 2px 2px;
@@ -494,8 +501,8 @@ export default {
  background-color: #f6f1ed;
  box-sizing: border-box;
  position: absolute; 
- top: 155px; 
- left: 174px;
+ top: 5px; 
+ left: 124px;
 }
 
 .main-image {
@@ -606,7 +613,7 @@ export default {
 }
 
 .rectangle2 {
-  width: 682px;
+  width: 582px;
   height: 208px;
   padding: 2px 2px 2px 2px;
   border-radius: 16px;
@@ -627,8 +634,8 @@ export default {
   line-height: normal;
 }
 .right-page{
-	  width: 405px;
-	  height: 811px;
+	  width: 360px;
+	  height: 686px;
 	  padding: 2px 2px 2px 2px;
 	  border-radius: 15px;
 	  border: 3px solid rgba(184, 48, 27, 0.38);

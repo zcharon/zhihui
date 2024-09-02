@@ -4,29 +4,27 @@
 		<view class="left-panel" >
 			<cd-tabbar></cd-tabbar>
 		</view>
-		<view style="display:flex;flex-direction: column;width:90%">
 		<view style="display: flex;">
 			
-			 <view class="left-arrow-button" style="margin-top:3.5vh;margin-left:15%;display: flex;">
-							<img src="/static/page1/u17.png" class="left-icon" style="margin-left:0.5vh;margin-top:0.5vh;"/>
+			 <view class="left-arrow-button" style="margin-top:3.5vh;margin-left:20vh;display: flex;">
+							<img src="/static/page1/u17.png" class="left-icon" style="margin-left:5px;margin-top:5px;"/>
 							<text class="xuanzehuafeng" style="margin-left:10px;margin-top:12px;">
 								选 择 画 风
 							</text>
 			</view>
 			<view class="right-arrow-button" style="margin-top:3.5vh;margin-left:4vh;display: flex;">
-							<img src="/static/page1/u16.png" class="right-icon" style="margin-left:0.5vh;margin-top:0.5vh;"/>
+							<img src="/static/page1/u16.png" class="right-icon" style="margin-left:5px;margin-top:5px;"/>
 							<text class="zhizuohuiben" style="margin-left:10px;margin-top:12px;">
 								制 作 绘 本
 							</text>
 			</view>
-			<view @click="save()" class="baocun" style="margin-top:3.5vh;margin-left:4vh;display: flex;">
+			<view class="baocun" style="margin-top:3.5vh;margin-left:4vh;display: flex;">
 							<text class="baocun-text" style="margin-top:12px;">
 								保 存
 							</text>
 			</view>
 		</view>
-		<view style="display: flex;width:90%;box-sizing: border-box;">
-		<view class="left-page" style="margin-top:3.5vh;margin-left:15%;width:40%">
+		<view class="left-page" style="position:absolute; top: 169px;left: 164px;">
 			<scroll-view class="chat-content" scroll-y="false" :scroll-top="scrollTop">
 			  <view class="msg-list">
 				<view v-for="(item, index) in msgList" :key="index" :class="item.type">
@@ -50,29 +48,21 @@
 			</scroll-view>
 			<!-- 输入框及发送按钮 -->
 			<view>
-				<view class="text-field" style="margin-left:1vh">
+				<view class="text-field" style="position: absolute; top: 740px; left: 25px;">
 				  <input  type="text"  v-model="user_input" @keypress.enter="inputInput" placeholder="" 
 					style="width: 200px; height: 30px;"/>
 				</view>
 				<view @click="audioRecord">
 				  <img 
 					src="/static/chat/normal_u46.png" 
-					style="width: 83px; height: 83px; box-sizing: border-box; margin-top:-15vh;margin-left:35vh" />
+					style="width: 93px; height: 93px; box-sizing: border-box; position: absolute; top: 685px; left: 285px;" />
 				</view>
 			</view>
-			<div v-if="!output_ || msgList.length <= 1" class="speech-input" style="z-index: 10;">
-			      <span style="position: absolute; top: 488px; left: 258px;">
-			        快 点 击 话 筒 
-			        <img src="@/static/u100.png" alt="microphone" style="width: 33px; height: 33px; box-sizing: border-box;"/> 
-			        吧 
-			        <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; margin-left: 10px;">
-			      </span>
-			</div>
 			<view>
 				<loading v-if="isLoading" size="30px" type="default"></loading>
 			</view>
 		</view>
-		<view class="rectangle3" style="margin-top:3.5vh;margin-left:4vh;width:60%;">
+		<view class="rectangle3" style="position:absolute; top: 169px;left: 594px;">
 			<view style="display:flex; width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: 20px;">
 				<img src="/static/page1/normal_u18.png" style="width: 29px;height: 29px;box-sizing: border-box;">
 				<text style="color:#704a10;font-weight:bold;font-size:20px;margin-left: 10px;">{{title}}</text>
@@ -83,10 +73,10 @@
 			<view v-if="image !== ''" >
 				<img :src="`${BASE_URL}${data[page].pag_img}?t=${new Date().getTime()}`" style="width: 682px;height: 341px;box-sizing: border-box;margin-left: 20px;margin-top: -290px;">
 			</view>
-			<view class="element3" style="width:100%;">
+			<view class="element3" style="margin-left: 20px;">
 				<text style="box-sizing: border-box;text-align: center;line-height: center;">{{content}}</text>
 			</view>
-			<view style="margin-left:165px;margin-top:40px;display: flex;">
+			<view style="margin-left:215px;margin-top:40px;display: flex;">
 				<img src="/static/common/normal_u41.png" 
 				     @click="image !== '' && resetIndex()" 
 				     style="width: 35px;height: 35px;box-sizing: border-box;">
@@ -130,7 +120,6 @@
 					        @change="onVoiceChange($event, roleName)">
 							<view style="color:#333333; font-size: 18px;">{{selectedVoice[roleName]}}</view>
 					    </picker>
-						<img src="/static/page1/bi.png" style=" width: 18px;height: 18px;box-sizing: border-box;margin-left:5px;">
 					</view>
 					<view style="display: flex; margin-top: 10px;">
 						<text style="color:#333333; font-size: 18px; font-weight: bold;">音量：</text>
@@ -147,12 +136,24 @@
 					style=" width: 54px;height: 54px;box-sizing: border-box;margin-top: 40px;margin-left:155px;">
 			</view>
 		</view>
-		</view>
-		</view>
-		
+		<div v-if="!output_ || msgList.length <= 1" class="speech-input" style="z-index: 10;">
+		      <span style="position: absolute; top: 558px; left: 288px;">
+		        快 点 击 话 筒 
+		        <img src="@/static/u100.png" alt="microphone" style="width: 33px; height: 33px; box-sizing: border-box;"/> 
+		        吧 
+		        <img src="/static/chat/normal_u45.png" style="width: 19px; height: 19px; box-sizing: border-box; margin-left: 10px;">
+		      </span>
+		    </div>
+		<!-- <view v-if="create_flag" class="element4" 
+		      style="z-index: 5;position:absolute; top: 662px;left: 532px;"
+		      @click="format_story_cotent.length > 0 ? create_switch() : null">
+		    <text style="box-sizing: border-box;align-items: center;justify-content: center;font-size: 20px;font-weight: bold;position:absolute; top: 22px;left: 25px;">
+		        生 成
+		    </text>
+		</view> -->
 		<view 
 		  class="element4" 
-		  :style="create_flag ? { zIndex: 5, position: 'absolute', top: '562px', left: '432px' } : { backgroundColor: 'grey', zIndex: 5, position: 'absolute', top: '562px', left: '432px' }"
+		  :style="create_flag ? { zIndex: 5, position: 'absolute', top: '662px', left: '532px' } : { backgroundColor: 'grey', zIndex: 5, position: 'absolute', top: '662px', left: '532px' }"
 		  @click="format_story_cotent.length > 0 && create_flag ? create_switch() : null">
 		  <text style="box-sizing: border-box; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; position: absolute; top: 22px; left: 25px;">
 		    生 成
@@ -223,31 +224,6 @@ export default {
 		};
 	},
 	methods: {
-		async save(){
-			try {
-				const response = await fetch(`${BASE_URL}/story/saveStory`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						"title":this.title,
-						"format_script_content": this.format_script_content,
-						"format_story_cotent": this.format_story_cotent,
-						"username": "刘小年",
-					})
-				});
-				if (!response.ok) {
-					throw new Error('Saving failed! Please try again!');
-				}
-				alert('绘本保存成功！');
-				
-			} catch (error) {
-				console.error('Error:', error);
-				alert('An error occurred while saveing');
-			}
-			
-		},
 		async create_switch(){
 			console.log("switch_flag", this.switch_flag)
 			if (this.switch_flag === false){
@@ -278,10 +254,11 @@ export default {
 					})
 				});
 				this.isLoading = false
-				this.create_flag = true
 				if (!response.ok) {
 					throw new Error('Story generation failed');
+					this.create_flag = true
 				}
+				
 				// const data = await response.json();
 				// const response = await fetch('/pages/page1/comics.json');
 				// if (!response.ok) {
@@ -324,7 +301,6 @@ export default {
 					})
 				});
 				this.isLoading = false
-				this.create_flag = true
 				if (!response.ok) {
 					throw new Error('Input content failed');
 				}
@@ -336,6 +312,7 @@ export default {
 				    }
 				});
 			} catch (error) {
+				this.create_flag = true
 				console.error('Error:', error);
 				alert('An error occurred while input the chat content');
 			}
@@ -704,23 +681,11 @@ export default {
 </script>
 
 <style scoped>
-	
-/* .container {
+.container {
   display: flex;
   flex-direction: column;
-	height: 100vh;
-
-} */
-.container {
-    display: flex;
-    flex: 1;
-    position: fixed; 
-    top: 5%; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    overflow-y: auto; 
-    overflow-x: hidden; 
+/*  height: 100vh;
+  background-color: #f8f2eb; */
 }
 
 .header {
@@ -745,7 +710,6 @@ export default {
 .content {
   display: flex;
   flex: 1;
-
 }
 
 
@@ -962,7 +926,7 @@ export default {
 }
 
 .rectangle3 {
- width: 722px;
+  width: 722px;
   height: 810px;
   display: flex;
   flex-direction: column;
@@ -973,7 +937,7 @@ export default {
 }
 
 .element3 {
- width: 682px;
+  width: 682px;
   height: 85px;
   padding: 2px 2px 2px 2px;
   background-color: #f2f2f2;

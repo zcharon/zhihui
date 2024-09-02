@@ -131,32 +131,35 @@ export default {
 	},
     async fetchUserData() {
       try {
-  //       const response = await fetch('https://your-backend-api.com/fetchUserData', {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         }
-  //       });
+        const response = await fetch(`${BASE_URL}/auth/fetchUserData`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+		  body: JSON.stringify({
+		    user_id: 1,
+		  })
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch book data');
+        }
     
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch book data');
-  //       }
-    
-  //       const response_data = await response.json();
-		// var data = response_data.data
-  //       this.user_name = data.user_name;
+        const response_data = await response.json();
+		var data = response_data.data
+		console.log(response_data)
+        this.user_name = data.username;
+		this.user_age = data.age;
+		this.create_books_num = data.create_books_num;
+		this.viewed_books_num = data.viewed_books_num;
+		// const response = await fetch('/pages/mainpage/userData.json');
+		// if (!response.ok) {
+		// 	throw new Error('Failed to fetch mock data');
+		// }
+		// const data = await response.json();
+		// this.user_name = data.user_name;
 		// this.user_age = data.user_age;
 		// this.create_books_num = data.create_books_num;
 		// this.viewed_books_num = data.viewed_books_num;
-		const response = await fetch('/pages/mainpage/userData.json');
-		if (!response.ok) {
-			throw new Error('Failed to fetch mock data');
-		}
-		const data = await response.json();
-		this.user_name = data.user_name;
-		this.user_age = data.user_age;
-		this.create_books_num = data.create_books_num;
-		this.viewed_books_num = data.viewed_books_num;
       } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching book data');
@@ -170,7 +173,7 @@ export default {
             'Content-Type': 'application/json'
           },
 		  body: JSON.stringify({
-		    user_id: 2,
+		    user_id: 1,
 		  })
         });
 		
@@ -179,8 +182,9 @@ export default {
         }
 		
         const data = await response.json();
-		console.log(data)
+		// console.log(data)
         this.my_book_data = data.data;
+		console.log("my_book_data", this.my_book_data)
 	  // const response = await fetch('/pages/mainpage/myBookData.json');
 		 //  if (!response.ok) {
 			// throw new Error('Failed to fetch mock data');
@@ -221,6 +225,7 @@ export default {
       }
     },
 	navigateTo(path, comic_id) {
+		console.log("navigateTo", comic_id)
 		this.$router.push({
 		    path: path,
 		    query: {
